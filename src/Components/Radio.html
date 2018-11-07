@@ -1,6 +1,8 @@
 {#each question.answerElements as {answerID,answerText}}
-	<input type="radio" id={answerID} value={answerID} name='radio_{question.questionId}' bind:group=question.value />
-	<label for={answerID}>{answerText}</label>
+	<div>
+		<input type="radio" id={answerID} value="{answerID}" name='radio_{question.questionID}' bind:group=question.value />
+		<label for={answerID}>{answerText}</label>
+	</div>
 {/each}
 
 <style>
@@ -8,4 +10,3 @@
 		display: inline-block;
 	}
 </style>
-

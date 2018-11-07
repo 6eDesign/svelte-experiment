@@ -1,6 +1,11 @@
 <div>
   {#if templates[question.presentationType]}
-    <svelte:component name="Question" this="{templates[question.presentationType]}" bind:question />
+    <div class="question-container">
+      <svelte:component name="Question" this="{templates[question.presentationType]}" bind:question />
+    </div>
+    <p>
+      <strong>Answer:</strong> {question.value}
+    </p>
   {:else}
     <p><strong>Need to define mapping for <em>"{question.presentationType}"</em></strong></p>
   {/if}
@@ -9,7 +14,11 @@
 <style>
   p { 
     font-weight: bold;
-    font-size: 1.3em;
+  }
+  .question-container { 
+    display: inline-block;
+    margin: 15px auto;
+    text-align: left;
   }
 </style>
 
