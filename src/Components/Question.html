@@ -1,6 +1,10 @@
-<div bind:height style='margin-bottom: calc(100vh - {height}px);'>
+<div>
   <p>{question.questionText}</p>
-  <svelte:component name="Question" this="{templates[question.questionType]}" bind:question />
+  {#if templates[question.presentationType]}
+    <svelte:component name="Question" this="{templates[question.presentationType]}" bind:question />
+  {:else}
+    <p><strong>Need to define mapping for <em>"{question.presentationType}"</em></strong></p>
+  {/if}
 </div>
 
 <style>
@@ -9,18 +13,34 @@
     border: 1px solid #ccc;
     margin: 10px auto;
     max-width: 500px;
-    margin-bottom: calc(100vh - 300px);
   }
 </style>
 
 <script>
 	import Radio from './Radio.html';
+	import Checkbox from './Checkbox.html';
 	import Select from './Select.html';
 	import Text from './Text.html';
 
 	export default { 
 		data() { 
-			return { templates: { Radio, Select, Text }	}
+			return { 
+        templates: { 
+          DROP_LIST: Select,
+          DROP_LIST_RIGHT_ADJUSTED: Select,
+          CHECK_BOX: Checkbox,
+          RADIO_ONEPER_LINE: Radio,
+          RADIO_SINGLE_LINE: Radio,
+          RADIO_BUTTON: Radio,
+          RADIO_SINGLE_LINE_LEFT: Radio, 
+          TEXT_BOX_ZIPCODE: Text,
+          TEXT_BOX_LEFT_ADJUSTED: Text, 
+          // DATE: Date, 
+          // CALENDAR: Date,
+          // TEXT_AREA: Textarea,
+          // GRAPHICAL_RADIO: GraphicalRadio
+        }	
+      }
 		}
 	}
 </script>

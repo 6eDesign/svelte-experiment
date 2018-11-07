@@ -1,0 +1,19 @@
+{#await promise}
+  <slot name='loading'>
+	  <div>Loading...</div>
+  </slot>
+{:then success}
+	<slot name='loaded'></slot>
+{:catch error}
+  <slot name='error'>
+	  <h1>Error!</h1>
+  </slot>
+{/await}
+
+<!-- <script>
+  export default { 
+    components: { 
+      Json: './Json.html'
+    }
+  }
+</script> -->

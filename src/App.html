@@ -1,8 +1,13 @@
-{#each questions as question}
-	<Question bind:question />
-{/each}
-
-<Json json={questions} />
+<View bind:promise bind:interviewSteps>
+	<span slot='loaded'>
+		{#each interviewSteps as question}
+			<!-- <Json bind:json=question name="{question.questionID}.json" /> -->
+			<Question bind:question />
+		{/each}
+		<Json bind:json=interviewSteps name='interview.json' />
+		<Json bind:json=info name='info.json' />
+	</span>
+</View>
 
 <style>
   body { 
@@ -12,69 +17,53 @@
 </style>
 
 <script>
-	import Question from './Components/Question.html';
-	import Json from './Components/Json.html';
+
+	let formatQuestion = q => { 
+		switch(q.presentationType) { 
+			case 'CHECK_BOX': 
+				q.answerElements.forEach(a => a.checked = false);
+				break; 
+		}
+	}; 
+
+	let transformData = (values) => {
+		let [interview,info] = values;
+		return { 
+			info, 
+			interviewSteps: interview.questionElements.map(q => {
+				q.presentationType = q.answerElements[0].presentationType;
+				q.value = '';
+				console.log(q.presentationType);
+				return q;
+			})
+		}
+	}
 
 	export default {
 		data() { 
-			return { 
-				questions: [
-					{
-						questionText: 'Enter Zip:',
-						questionType: 'Text',
-						questionId: '0123',
-						placeholder: 'Enter zip',
-						value: ''
-					},
-					{ 
-						questionText: 'This is question text',
-						questionType: 'Radio', 
-						questionId: '1234',
-						value: 'Answer 1',
-						answers: [ 
-							{
-								id: 1, 
-								value: 'Answer 1'
-							}, {
-								id: 2, 
-								value: 'Answer 2'
-							}  
-						]					
-					}, { 
-						questionText: 'This is question text #2',
-						questionType: 'Radio', 
-						questionId: '2345',
-						value: 'Answer 2',
-						answers: [ 
-							{
-								id: 3, 
-								value: 'Answer 1'
-							}, {
-								id: 4, 
-								value: 'Answer 2'
-							}  
-						]					
-					}, { 
-						questionText: 'This is question text #3',
-						questionType: 'Radio', 
-						questionId: '3456',
-						value: 'Answer 1',
-						answers: [ 
-							{
-								id: 3, 
-								value: 'Answer 1'
-							}, {
-								id: 4, 
-								value: 'Answer 2'
-							}  
-						]					
-					}
-				]
+			return {
+				interviewSteps: []
 			}
 		},
+		oncreate() { 
+			let getInterview = fetch(`/data/interview.json`)
+			let getInfo = fetch(`/data/taskInfo.json`)
+			this.set({
+				promise: Promise.all([getInterview, getInfo])
+					.then(values => Promise.all(values.map(v => v.json())))
+					.then()
+					.then(data => {
+						this.set(transformData(data));
+					})
+					.catch(errors => {
+						console.log(errors);
+					})
+			})
+		}, 
 		components: {
-			Question, 
-			Json
+			Question: './Components/Question.html', 
+			Json: './Components/Json.html', 
+			View: './Components/View.html'
 		}
 	};
 </script>

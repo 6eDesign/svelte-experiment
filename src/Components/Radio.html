@@ -1,6 +1,6 @@
-{#each question.answers as {id, value}}
-	<input type="radio" {id} {value} name='radio_{question.questionId}' bind:group=question.value />
-	<label for={id}>{value}</label>
+{#each question.answerElements as {answerID,answerText}}
+	<input type="radio" id={answerID} value={answerID} name='radio_{question.questionId}' bind:group=question.value />
+	<label for={id}>{answerText}</label>
 {/each}
 
 <style>

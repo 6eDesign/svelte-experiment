@@ -1,14 +1,24 @@
-<pre>{JSON.stringify(json,null,2)}</pre>
+<div>
+  <strong>{name}</strong>
+  <pre>{JSON.stringify(json,null,2)}</pre>
+</div>
 
 <style>
+  div, pre { 
+    max-width: 800px;
+    margin: 10px auto;
+  }
   pre { 
-    position: fixed;
-    bottom: 0; 
-    right: 0; 
-    top: 0; 
-    background-color: #eee;
-    color: #333;
-    margin: 0;
+    opacity: 0.5;
+    background-color: #333;
+    color: #fff;
     padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>
+
+<script>
+
+</script>
