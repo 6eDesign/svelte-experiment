@@ -1,11 +1,20 @@
 <View bind:promise bind:interviewSteps>
 	<span slot='loaded'>
-		{#each interviewSteps as question}
-			<!-- <Json bind:json=question name="{question.questionID}.json" /> -->
-			<Question bind:question />
+		{#each interviewSteps as step}
+			{#if step.stepType == 'interviewQuestion'}
+				<InterviewStep>
+					<div slot="heading">
+						{step.questionText}
+					</div>
+					<div slot="body">
+						<Question bind:question=step />
+					</div>
+				</InterviewStep>
+				<!-- <Json bind:json=step name="{step.questionID}.json" /> -->
+			{/if}
 		{/each}
-		<Json bind:json=interviewSteps name='interview.json' />
-		<Json bind:json=info name='info.json' />
+		<!-- <Json bind:json=interviewSteps name='interview.json' />
+		<Json bind:json=info name='info.json' /> -->
 	</span>
 </View>
 
@@ -33,7 +42,8 @@
 			interviewSteps: interview.questionElements.map(q => {
 				q.presentationType = q.answerElements[0].presentationType;
 				q.value = '';
-				console.log(q.presentationType);
+				q.valid = false;
+				q.stepType = 'interviewQuestion';
 				return q;
 			})
 		}
@@ -61,8 +71,9 @@
 			})
 		}, 
 		components: {
+			InterviewStep: './Components/InterviewStep.html',
 			Question: './Components/Question.html', 
-			Json: './Components/Json.html', 
+			// Json: './Components/Json.html', 
 			View: './Components/View.html'
 		}
 	};

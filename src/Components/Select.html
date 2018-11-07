@@ -1,4 +1,3 @@
-<label for={question.questionId}>Select</label>
 <select id={question.questionId} bind:value=question.value>
 	{#each question.answerElements as {answerID,answerText}}
 		<option value={answerID}>

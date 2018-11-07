@@ -1,1 +1,23 @@
-<h1>Checkbox!</h1>
+{#each question.answerElements as {answerID,answerText,checked}}
+  <div>
+    <input type="checkbox" id={answerID} value={answerID} bind:checked=checked on:change="updateValue(question)" />
+    <label for={answerID}>{answerText}</label>
+  </div>
+{/each}
+
+<style>
+  label { 
+    display: inline-block;
+  }
+</style>
+
+<script>
+	export default { 
+		methods: { 
+			updateValue(question) { 
+        question.value = question.answerElements.filter(a => a.checked).map(a => a.answerID).join(',');
+        this.set({question});
+			}
+		}
+	}
+</script>

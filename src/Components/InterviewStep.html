@@ -1,0 +1,37 @@
+<div class="bs-card white">
+  <div class="card-section">
+    <div class="card-heading">
+      <slot name='heading'>
+        <div>Heading</div>
+      </slot>
+    </div>
+    <slot name='body'></slot>
+    <div class="card-footer">
+      <slot name='footer'>
+        <a href="/previous-step">Previous</a>
+        <a class="bs-btn" href="/next-step">Next</a>
+      </slot>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bs-card { 
+    max-width: 1000px;
+    margin: 0 auto;
+    /* text-align: center; */
+  }
+  .card-heading { 
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .card-footer { 
+    text-align: center;
+    padding: 15px 10px;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+  }
+</style>

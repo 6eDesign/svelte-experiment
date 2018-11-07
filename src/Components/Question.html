@@ -1,5 +1,4 @@
 <div>
-  <p>{question.questionText}</p>
   {#if templates[question.presentationType]}
     <svelte:component name="Question" this="{templates[question.presentationType]}" bind:question />
   {:else}
@@ -8,11 +7,9 @@
 </div>
 
 <style>
-  div { 
-    padding: 20px 50px;
-    border: 1px solid #ccc;
-    margin: 10px auto;
-    max-width: 500px;
+  p { 
+    font-weight: bold;
+    font-size: 1.3em;
   }
 </style>
 
