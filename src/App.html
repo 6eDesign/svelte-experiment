@@ -1,0 +1,80 @@
+{#each questions as question}
+	<Question bind:question />
+{/each}
+
+<Json json={questions} />
+
+<style>
+  body { 
+    padding: 0;
+    margin: 0;
+  }
+</style>
+
+<script>
+	import Question from './Components/Question.html';
+	import Json from './Components/Json.html';
+
+	export default {
+		data() { 
+			return { 
+				questions: [
+					{
+						questionText: 'Enter Zip:',
+						questionType: 'Text',
+						questionId: '0123',
+						placeholder: 'Enter zip',
+						value: ''
+					},
+					{ 
+						questionText: 'This is question text',
+						questionType: 'Radio', 
+						questionId: '1234',
+						value: 'Answer 1',
+						answers: [ 
+							{
+								id: 1, 
+								value: 'Answer 1'
+							}, {
+								id: 2, 
+								value: 'Answer 2'
+							}  
+						]					
+					}, { 
+						questionText: 'This is question text #2',
+						questionType: 'Radio', 
+						questionId: '2345',
+						value: 'Answer 2',
+						answers: [ 
+							{
+								id: 3, 
+								value: 'Answer 1'
+							}, {
+								id: 4, 
+								value: 'Answer 2'
+							}  
+						]					
+					}, { 
+						questionText: 'This is question text #3',
+						questionType: 'Radio', 
+						questionId: '3456',
+						value: 'Answer 1',
+						answers: [ 
+							{
+								id: 3, 
+								value: 'Answer 1'
+							}, {
+								id: 4, 
+								value: 'Answer 2'
+							}  
+						]					
+					}
+				]
+			}
+		},
+		components: {
+			Question, 
+			Json
+		}
+	};
+</script>

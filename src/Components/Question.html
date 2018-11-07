@@ -1,0 +1,26 @@
+<div bind:height style='margin-bottom: calc(100vh - {height}px);'>
+  <p>{question.questionText}</p>
+  <svelte:component name="Question" this="{templates[question.questionType]}" bind:question />
+</div>
+
+<style>
+  div { 
+    padding: 20px 50px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    max-width: 500px;
+    margin-bottom: calc(100vh - 300px);
+  }
+</style>
+
+<script>
+	import Radio from './Radio.html';
+	import Select from './Select.html';
+	import Text from './Text.html';
+
+	export default { 
+		data() { 
+			return { templates: { Radio, Select, Text }	}
+		}
+	}
+</script>
