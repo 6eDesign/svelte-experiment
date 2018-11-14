@@ -1,2 +1,2558 @@
-var app=function(){"use strict";function t(){}function e(t,e){for(var n in e)t[n]=e[n];return t}function n(t,e){return 0===e&&t(),()=>{--e||t()}}function o(t){t()}function s(t,e){t.appendChild(e)}function i(t,e,n){t.insertBefore(e,n)}function r(t){t.parentNode.removeChild(t)}function a(t,e,n){for(;t.nextSibling&&t.nextSibling!==e;)n.appendChild(t.parentNode.removeChild(t.nextSibling))}function u(t,e){for(;t.firstChild;)e.appendChild(t.firstChild)}function c(t,e){for(var n=0;n<t.length;n+=1)t[n]&&t[n].d(e)}function l(){return document.createDocumentFragment()}function h(t){return document.createElement(t)}function _(t){return document.createTextNode(t)}function d(){return document.createComment("")}function f(t,e,n,o){t.addEventListener(e,n,o)}function p(t,e,n,o){t.removeEventListener(e,n,o)}function m(t,e,n){null==n?t.removeAttribute(e):t.setAttribute(e,n)}function v(t,e){t.data=""+e}function g(t,e){for(var n=0;n<t.options.length;n+=1){var o=t.options[n];if(o.__value===e)return void(o.selected=!0)}}function q(t,n){var o,s=n.token={};function i(t,o,i,r){if(n.token!==s)return;n.resolved=i&&{[i]:r};const a=e(e({},n.ctx),n.resolved),u=t&&(n.current=t)(n.component,a);n.block&&(n.blocks?n.blocks.forEach((t,e)=>{e!==o&&t&&t.o(()=>{t.d(1),n.blocks[e]=null})}):n.block.d(1),u.c(),u[u.i?"i":"m"](n.mount(),n.anchor),n.component.root.set({})),n.block=u,n.blocks&&(n.blocks[o]=u)}if((o=t)&&"function"==typeof o.then){if(t.then(t=>{i(n.then,1,n.value,t)},t=>{i(n.catch,2,n.error,t)}),n.current!==n.pending)return i(n.pending,0),!0}else{if(n.current!==n.then)return i(n.then,1,n.value,t),!0;n.resolved={[n.value]:t}}}function w(){return Object.create(null)}function b(t){t._lock=!0,x(t._beforecreate),x(t._oncreate),x(t._aftercreate),t._lock=!1}function I(t,e){t._handlers=w(),t._slots=w(),t._bind=e._bind,t._staged={},t.options=e,t.root=e.root||t,t.store=e.store||t.root.store,e.root||(t._beforecreate=[],t._oncreate=[],t._aftercreate=[])}function x(t){for(;t&&t.length;)t.shift()()}var D={destroy:function(e){this.destroy=t,this.fire("destroy"),this.set=t,this._fragment.d(!1!==e),this._fragment=null,this._state={}},get:function(){return this._state},fire:function(t,e){var n=t in this._handlers&&this._handlers[t].slice();if(n)for(var o=0;o<n.length;o+=1){var s=n[o];if(!s.__calling)try{s.__calling=!0,s.call(this,e)}finally{s.__calling=!1}}},on:function(t,e){var n=this._handlers[t]||(this._handlers[t]=[]);return n.push(e),{cancel:function(){var t=n.indexOf(e);~t&&n.splice(t,1)}}},set:function(t){this._set(e({},t)),this.root._lock||b(this.root)},_recompute:t,_set:function(t){var n=this._state,o={},s=!1;for(var i in t=e(this._staged,t),this._staged={},t)this._differs(t[i],n[i])&&(o[i]=s=!0);s&&(this._state=e(e({},n),t),this._recompute(o,this._state),this._bind&&this._bind(o,this._state),this._fragment&&(this.fire("state",{changed:o,current:this._state,previous:n}),this._fragment.p(o,this._state),this.fire("update",{changed:o,current:this._state,previous:n})))},_stage:function(t){e(this._staged,t)},_mount:function(t,e){this._fragment[this._fragment.i?"i":"m"](t,e||null)},_differs:function(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}};function E(n){var c,l,f,p,m,v,g,q,w,b,x,D,E,y,T,k,N;I(this,n),this._state=e({},n.data),this._intro=!!n.intro,this._slotted=n.slots||{},this._fragment=(c=this,this._state,T=c._slotted.heading,k=c._slotted.body,N=c._slotted.footer,{c(){l=h("div"),f=h("div"),p=h("div"),T||((m=h("div")).textContent="Heading"),v=_("\r\n    "),w=_("\r\n    "),b=h("div"),N||((x=h("a")).textContent="Previous",D=_("\r\n        "),(E=h("a")).textContent="Next"),p.className="card-heading svelte-98rrxd",N||(x.href="/previous-step",E.className="bs-btn",E.href="/next-step"),b.className="card-footer svelte-98rrxd",f.className="card-section svelte-98rrxd",l.className="bs-card white svelte-98rrxd"},m(t,e){i(t,l,e),s(l,f),s(f,p),s(p,T||m),s(f,v),k&&(s(f,g||(g=d())),s(f,k),s(f,q||(q=d()))),s(f,w),s(f,b),N?s(b,N):(s(b,x),s(b,D),s(b,E)),y=!0},p:t,i(t,e){y||this.m(t,e)},o:o,d(t){t&&r(l),T&&u(p,T),k&&(a(g,q,k),r(g),r(q)),N&&u(b,N)}}),n.target&&(this._fragment.c(),this._mount(n.target,n.anchor)),this._intro=!0}function y(t,e,n){const o=Object.create(t);return o.answerID=e[n].answerID,o.answerText=e[n].answerText,o}function T(t,e){var n,o,a,u,c,l,d,g,q,w,b=e.answerText;function I(){e.question.value=o.__value,t.set({question:e.question})}return{c(){n=h("div"),o=h("input"),l=_("\r\n\t\t"),d=h("label"),g=_(b),w=_("\r\n\t"),t._bindingGroups[0].push(o),f(o,"change",I),m(o,"type","radio"),o.id=a=e.answerID,o.__value=u=e.answerID,o.value=o.__value,o.name=c="radio_"+e.question.questionID,d.htmlFor=q=e.answerID,d.className="svelte-5jml85"},m(t,r){i(t,n,r),s(n,o),o.checked=o.__value===e.question.value,s(n,l),s(n,d),s(d,g),s(n,w)},p(t,n){e=n,t.question&&(o.checked=o.__value===e.question.value),t.question&&a!==(a=e.answerID)&&(o.id=a),t.question&&u!==(u=e.answerID)&&(o.__value=u),o.value=o.__value,t.question&&c!==(c="radio_"+e.question.questionID)&&(o.name=c),t.question&&b!==(b=e.answerText)&&v(g,b),t.question&&q!==(q=e.answerID)&&(d.htmlFor=q)},d(e){e&&r(n),t._bindingGroups[0].splice(t._bindingGroups[0].indexOf(o),1),p(o,"change",I)}}}function k(t){I(this,t),this._state=e({},t.data),this._bindingGroups=[[]],this._intro=!!t.intro,this._fragment=function(t,e){for(var n,s,a=e.question.answerElements,u=[],l=0;l<a.length;l+=1)u[l]=T(t,y(e,a,l));return{c(){for(var t=0;t<u.length;t+=1)u[t].c();n=d()},m(t,e){for(var o=0;o<u.length;o+=1)u[o].m(t,e);i(t,n,e),s=!0},p(e,o){if(e.question){a=o.question.answerElements;for(var s=0;s<a.length;s+=1){const i=y(o,a,s);u[s]?u[s].p(e,i):(u[s]=T(t,i),u[s].c(),u[s].m(n.parentNode,n))}for(;s<u.length;s+=1)u[s].d(1);u.length=a.length}},i(t,e){s||this.m(t,e)},o:o,d(t){c(u,t),t&&r(n)}}}(this,this._state),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor)),this._intro=!0}e(E.prototype,D),e(k.prototype,D);var N={updateValue(t){t.value=t.answerElements.filter(t=>t.checked).map(t=>t.answerID).join(","),this.set({question:t})}};function O(t){const{component:e,ctx:n}=this._svelte;e.updateValue(n.question)}function S(t,e,n){const o=Object.create(t);return o.answerID=e[n].answerID,o.answerText=e[n].answerText,o.checked=e[n].checked,o.each_value=e,o.each_index=n,o}function C(t,e){var n,o,a,u,c,l,d,g,q,w=e.answerText;function b(){e.each_value[e.each_index].checked=o.checked,t.set({question:e.question})}return{c(){n=h("div"),o=h("input"),c=_("\r\n    "),l=h("label"),d=_(w),q=_("\r\n  "),o._svelte={component:t,ctx:e},f(o,"change",b),f(o,"change",O),m(o,"type","checkbox"),o.id=a=e.answerID,o.__value=u=e.answerID,o.value=o.__value,l.htmlFor=g=e.answerID,l.className="svelte-1vp3xsv"},m(t,r){i(t,n,r),s(n,o),o.checked=e.checked,s(n,c),s(n,l),s(l,d),s(n,q)},p(t,n){e=n,o._svelte.ctx=e,t.question&&(o.checked=e.checked),t.question&&a!==(a=e.answerID)&&(o.id=a),t.question&&u!==(u=e.answerID)&&(o.__value=u),o.value=o.__value,t.question&&w!==(w=e.answerText)&&v(d,w),t.question&&g!==(g=e.answerID)&&(l.htmlFor=g)},d(t){t&&r(n),p(o,"change",b),p(o,"change",O)}}}function L(t){I(this,t),this._state=e({},t.data),this._intro=!!t.intro,this._fragment=function(t,e){for(var n,s,a=e.question.answerElements,u=[],l=0;l<a.length;l+=1)u[l]=C(t,S(e,a,l));return{c(){for(var t=0;t<u.length;t+=1)u[t].c();n=d()},m(t,e){for(var o=0;o<u.length;o+=1)u[o].m(t,e);i(t,n,e),s=!0},p(e,o){if(e.question){a=o.question.answerElements;for(var s=0;s<a.length;s+=1){const i=S(o,a,s);u[s]?u[s].p(e,i):(u[s]=C(t,i),u[s].c(),u[s].m(n.parentNode,n))}for(;s<u.length;s+=1)u[s].d(1);u.length=a.length}},i(t,e){s||this.m(t,e)},o:o,d(t){c(u,t),t&&r(n)}}}(this,this._state),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor)),this._intro=!0}function A(t,e,n){const o=Object.create(t);return o.answerID=e[n].answerID,o.answerText=e[n].answerText,o}function R(t,e){var n,o,a,u,c=e.answerText;return{c(){n=h("option"),o=_(c),a=_("\t\t\r\n\t\t"),n.__value=u=e.answerID,n.value=n.__value},m(t,e){i(t,n,e),s(n,o),s(n,a)},p(t,e){t.question&&c!==(c=e.answerText)&&v(o,c),t.question&&u!==(u=e.answerID)&&(n.__value=u),n.value=n.__value},d(t){t&&r(n)}}}function j(t){I(this,t),this._state=e({},t.data),this._intro=!!t.intro,this._fragment=function(t,e){for(var n,s,a,u=!1,l=e.question.answerElements,_=[],d=0;d<l.length;d+=1)_[d]=R(0,A(e,l,d));function m(){u=!0,e.question.value=function(t){var e=t.querySelector(":checked")||t.options[0];return e&&e.__value}(n),t.set({question:e.question}),u=!1}return{c(){n=h("select");for(var o=0;o<_.length;o+=1)_[o].c();f(n,"change",m),"question"in e||t.root._beforecreate.push(m),n.id=s=e.question.questionId},m(t,o){i(t,n,o);for(var s=0;s<_.length;s+=1)_[s].m(n,null);g(n,e.question.value),a=!0},p(t,o){if(e=o,t.question){l=e.question.answerElements;for(var i=0;i<l.length;i+=1){const o=A(e,l,i);_[i]?_[i].p(t,o):(_[i]=R(0,o),_[i].c(),_[i].m(n,null))}for(;i<_.length;i+=1)_[i].d(1);_.length=l.length}!u&&t.question&&g(n,e.question.value),t.question&&s!==(s=e.question.questionId)&&(n.id=s)},i(t,e){a||this.m(t,e)},o:o,d(t){t&&r(n),c(_,t),p(n,"change",m)}}}(this,this._state),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor),b(this)),this._intro=!0}function G(t){I(this,t),this._state=e({},t.data),this._intro=!!t.intro,this._fragment=function(t,e){var n,s,a,u=!1;function c(){u=!0,e.question.value=n.value,t.set({question:e.question}),u=!1}return{c(){f(n=h("input"),"input",c),m(n,"type","text"),n.placeholder=s=e.question.placeholder},m(t,o){i(t,n,o),n.value=e.question.value,a=!0},p(t,o){e=o,!u&&t.question&&(n.value=e.question.value),t.question&&s!==(s=e.question.placeholder)&&(n.placeholder=s)},i(t,e){a||this.m(t,e)},o:o,d(t){t&&r(n),p(n,"input",c)}}}(this,this._state),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor)),this._intro=!0}function B(t,e){var n,a,u,c,l,d,f,p,m=e.question.presentationType;return{c(){n=h("p"),a=h("strong"),u=_("Need to define mapping for "),c=h("em"),l=_('"'),d=_(m),f=_('"'),n.className="svelte-1lp21kb"},m(t,e){i(t,n,e),s(n,a),s(a,u),s(a,c),s(c,l),s(c,d),s(c,f),p=!0},p(t,e){t.question&&m!==(m=e.question.presentationType)&&v(d,m)},i(t,e){p||this.m(t,e)},o:o,d(t){t&&r(n)}}}function F(t,e){var n,o,a,u,c,l,d,f={},p=e.question.value,m=e.templates[e.question.presentationType];function g(e){var n={name:"Question"};return void 0!==e.question&&(n.question=e.question,f.question=!0),{root:t.root,store:t.store,data:n,_bind(e,n){var o={};!f.question&&e.question&&(o.question=n.question),t._set(o),f={}}}}if(m){var q=new m(g(e));t.root._beforecreate.push(()=>{q._bind({question:1},q.get())})}return{c(){n=h("div"),q&&q._fragment.c(),o=_("\r\n    "),a=h("p"),(u=h("strong")).textContent="Answer:",c=_(" "),l=_(p),n.className="question-container svelte-1lp21kb",a.className="svelte-1lp21kb"},m(t,e){i(t,n,e),q&&q._mount(n,null),i(t,o,e),i(t,a,e),s(a,u),s(a,c),s(a,l),d=!0},p(o,s){e=s;var i={};if(!f.question&&o.question&&(i.question=e.question,f.question=void 0!==e.question),m!==(m=e.templates[e.question.presentationType])){if(q){const t=q;t._fragment.o(()=>{t.destroy()})}m?(q=new m(g(e)),t.root._beforecreate.push(()=>{const t={};void 0===e.question&&(t.question=1),q._bind(t,q.get())}),q._fragment.c(),q._mount(n,null)):q=null}else m&&(q._set(i),f={});d&&!o.question||p===(p=e.question.value)||v(l,p)},i(t,e){d||this.m(t,e)},o(t){d&&(q&&q._fragment.o(t),d=!1)},d(t){t&&r(n),q&&q.destroy(),t&&(r(o),r(a))}}}function P(t){I(this,t),this._state=e({templates:{DROP_LIST:j,DROP_LIST_RIGHT_ADJUSTED:j,CHECK_BOX:L,RADIO_ONEPER_LINE:k,RADIO_SINGLE_LINE:k,RADIO_BUTTON:k,RADIO_SINGLE_LINE_LEFT:k,TEXT_BOX_ZIPCODE:G,TEXT_BOX_LEFT_ADJUSTED:G}},t.data),this._intro=!!t.intro,this._fragment=function(t,e){var n,o,s,a,u=[F,B],c=[];function l(t){return t.templates[t.question.presentationType]?0:1}return o=l(e),s=c[o]=u[o](t,e),{c(){n=h("div"),s.c()},m(t,e){i(t,n,e),c[o].m(n,null),a=!0},p(e,i){var r=o;(o=l(i))===r?c[o].p(e,i):(s.o(function(){c[r].d(1),c[r]=null}),(s=c[o])||(s=c[o]=u[o](t,i)).c(),s.m(n,null))},i(t,e){a||this.m(t,e)},o(t){a&&(s?s.o(t):t(),a=!1)},d(t){t&&r(n),c[o].d()}}}(this,this._state),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor),b(this)),this._intro=!0}function X(t,e){var n,o,s,u=t._slotted.error;return{c(){u||((s=h("h1")).textContent="Error!")},m(t,e){u?(i(t,n||(n=d()),e),i(t,u,e),i(t,o||(o=d()),e)):i(t,s,e)},d(t){u?(a(n,o,u),r(n),r(o)):t&&r(s)}}}function H(e,n){var o,s,u=e._slotted.loaded;return{c:t,m(t,e){u&&(i(t,o||(o=d()),e),i(t,u,e),i(t,s||(s=d()),e))},d(t){u&&(a(o,s,u),r(o),r(s))}}}function Q(t,e){var n,o,s,u=t._slotted.loading;return{c(){u||((s=h("div")).textContent="Loading...")},m(t,e){u?(i(t,n||(n=d()),e),i(t,u,e),i(t,o||(o=d()),e)):i(t,s,e)},d(t){u?(a(n,o,u),r(n),r(o)):t&&r(s)}}}function U(t){I(this,t),this._state=e({},t.data),this._intro=!!t.intro,this._slotted=t.slots||{},this._fragment=function(t,e){var n,s,a;let u={component:t,ctx:e,current:null,pending:Q,then:H,catch:X,value:"success",error:"error"};return q(s=e.promise,u),{c(){n=d(),u.block.c()},m(t,e){i(t,n,e),u.block.m(t,u.anchor=e),u.mount=(()=>n.parentNode),a=!0},p(t,n){e=n,u.ctx=e,"promise"in t&&s!==(s=e.promise)&&q(s,u)},i(t,e){a||this.m(t,e)},o:o,d(t){t&&r(n),u.block.d(t),u=null}}}(this,this._state),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor)),this._intro=!0}e(L.prototype,D),e(L.prototype,N),e(j.prototype,D),e(G.prototype,D),e(P.prototype,D),e(U.prototype,D);let J=t=>{let[e,n]=t;return{info:n,interviewSteps:e.questionElements.map(t=>(t.presentationType=t.answerElements[0].presentationType,t.value="",t.valid=!1,t.stepType="interviewQuestion",t.questionID=`ques_${t.questionID}`,t.answerElements.forEach(t=>t.answerID=`ans_${t.answerID}`),(t=>{switch(t.presentationType){case"CHECK_BOX":t.answerElements.forEach(t=>t.checked=!1);break;case"RADIO_ONEPER_LINE":case"RADIO_SINGLE_LINE":case"RADIO_BUTTON":case"RADIO_SINGLE_LINE_LEFT":t.value=t.answerElements[0].answerID}return t})(t)))}};function K(t,e,n){const o=Object.create(t);return o.step=e[n],o.each_value=e,o.step_index=n,o}function V(t,e){var o,i,r,a,u,c,d=e.step.questionText,f={},p={};void 0!==e.step&&(p.question=e.step,f.question=!0);var g=new P({root:t.root,store:t.store,data:p,_bind(n,o){var s={};!f.question&&n.question&&(e.each_value[e.step_index]=o.question=o.question,s.interviewSteps=e.interviewSteps),t._set(s),f={}}});t.root._beforecreate.push(()=>{g._bind({question:1},g.get())});var q=new E({root:t.root,store:t.store,slots:{default:l(),body:l(),heading:l()}});return{c(){o=h("div"),i=_(d),r=_("\r\n\t\t\t\t\t"),a=h("div"),g._fragment.c(),u=_("\r\n\t\t\t\t"),q._fragment.c(),m(o,"slot","heading"),m(a,"slot","body")},m(t,e){s(q._slotted.heading,o),s(o,i),s(q._slotted.default,r),s(q._slotted.body,a),g._mount(a,null),s(q._slotted.default,u),q._mount(t,e),c=!0},p(t,n){e=n,c&&!t.interviewSteps||d===(d=e.step.questionText)||v(i,d);var o={};!f.question&&t.interviewSteps&&(o.question=e.step,f.question=void 0!==e.step),g._set(o),f={}},i(t,e){c||this.m(t,e)},o(t){c&&(t=n(t,2),g&&g._fragment.o(t),q&&q._fragment.o(t),c=!1)},d(t){g.destroy(),q.destroy(t)}}}function $(t,e){var n,o,s="interviewQuestion"==e.step.stepType&&V(t,e);return{c(){s&&s.c(),n=d()},m(t,e){s&&s.m(t,e),i(t,n,e),o=!0},p(e,o){"interviewQuestion"==o.step.stepType?(s?s.p(e,o):(s=V(t,o))&&s.c(),s.i(n.parentNode,n)):s&&s.o(function(){s.d(1),s=null})},i(t,e){o||this.m(t,e)},o(t){o&&(s?s.o(t):t(),o=!1)},d(t){s&&s.d(t),t&&r(n)}}}function Z(t){I(this,t),this._state=e({interviewSteps:[]},t.data),this._intro=!!t.intro,this._fragment=function(t,e){for(var o,i,r={},a=e.interviewSteps,u=[],_=0;_<a.length;_+=1)u[_]=$(t,K(e,a,_));function d(t,e,n){u[t]&&u[t].o(()=>{e&&(u[t].d(e),u[t]=null),n&&n()})}var f={};void 0!==e.promise&&(f.promise=e.promise,r.promise=!0);var p=new U({root:t.root,store:t.store,slots:{default:l(),loaded:l()},data:f,_bind(e,n){var o={};!r.promise&&e.promise&&(o.promise=n.promise),t._set(o),r={}}});return t.root._beforecreate.push(()=>{p._bind({promise:1},p.get())}),{c(){o=h("span");for(var t=0;t<u.length;t+=1)u[t].c();p._fragment.c(),m(o,"slot","loaded")},m(t,e){s(p._slotted.loaded,o);for(var n=0;n<u.length;n+=1)u[n].i(o,null);p._mount(t,e),i=!0},p(n,s){if(e=s,n.interviewSteps){a=e.interviewSteps;for(var i=0;i<a.length;i+=1){const s=K(e,a,i);u[i]?u[i].p(n,s):(u[i]=$(t,s),u[i].c()),u[i].i(o,null)}for(;i<u.length;i+=1)d(i,1)}var c={};!r.promise&&n.promise&&(c.promise=e.promise,r.promise=void 0!==e.promise),p._set(c),r={}},i(t,e){i||this.m(t,e)},o(t){if(!i)return;t=n(t,2);const e=n(t,(u=u.filter(Boolean)).length);for(let t=0;t<u.length;t+=1)d(t,0,e);p&&p._fragment.o(t),i=!1},d(t){c(u,t),p.destroy(t)}}}(this,this._state),this.root._oncreate.push(()=>{(function(){let t=fetch("/data/interview.json"),e=fetch("/data/taskInfo.json");this.set({promise:Promise.all([t,e]).then(t=>Promise.all(t.map(t=>t.json()))).then().then(t=>{this.set(J(t))}).catch(t=>{console.log(t)})})}).call(this),this.fire("update",{changed:function(t,e){for(var n in e)t[n]=1;return t}({},this._state),current:this._state})}),t.target&&(this._fragment.c(),this._mount(t.target,t.anchor),b(this)),this._intro=!0}return e(Z.prototype,D),new Z({target:document.body,data:{name:"world"}})}();
+var app = (function () {
+	'use strict';
+
+	function noop() {}
+
+	function assign(tar, src) {
+		for (var k in src) tar[k] = src[k];
+		return tar;
+	}
+
+	function isPromise(value) {
+		return value && typeof value.then === 'function';
+	}
+
+	function callAfter(fn, i) {
+		if (i === 0) fn();
+		return () => {
+			if (!--i) fn();
+		};
+	}
+
+	function addLoc(element, file, line, column, char) {
+		element.__svelte_meta = {
+			loc: { file, line, column, char }
+		};
+	}
+
+	function run(fn) {
+		fn();
+	}
+
+	function append(target, node) {
+		target.appendChild(node);
+	}
+
+	function insert(target, node, anchor) {
+		target.insertBefore(node, anchor);
+	}
+
+	function detachNode(node) {
+		node.parentNode.removeChild(node);
+	}
+
+	function reinsertBetween(before, after, target) {
+		while (before.nextSibling && before.nextSibling !== after) {
+			target.appendChild(before.parentNode.removeChild(before.nextSibling));
+		}
+	}
+
+	function reinsertChildren(parent, target) {
+		while (parent.firstChild) target.appendChild(parent.firstChild);
+	}
+
+	function destroyEach(iterations, detach) {
+		for (var i = 0; i < iterations.length; i += 1) {
+			if (iterations[i]) iterations[i].d(detach);
+		}
+	}
+
+	function createFragment() {
+		return document.createDocumentFragment();
+	}
+
+	function createElement(name) {
+		return document.createElement(name);
+	}
+
+	function createText(data) {
+		return document.createTextNode(data);
+	}
+
+	function createComment() {
+		return document.createComment('');
+	}
+
+	function addListener(node, event, handler, options) {
+		node.addEventListener(event, handler, options);
+	}
+
+	function removeListener(node, event, handler, options) {
+		node.removeEventListener(event, handler, options);
+	}
+
+	function setAttribute(node, attribute, value) {
+		if (value == null) node.removeAttribute(attribute);
+		else node.setAttribute(attribute, value);
+	}
+
+	function setData(text, data) {
+		text.data = '' + data;
+	}
+
+	function selectOption(select, value) {
+		for (var i = 0; i < select.options.length; i += 1) {
+			var option = select.options[i];
+
+			if (option.__value === value) {
+				option.selected = true;
+				return;
+			}
+		}
+	}
+
+	function selectValue(select) {
+		var selectedOption = select.querySelector(':checked') || select.options[0];
+		return selectedOption && selectedOption.__value;
+	}
+
+	function handlePromise(promise, info) {
+		var token = info.token = {};
+
+		function update(type, index, key, value) {
+			if (info.token !== token) return;
+
+			info.resolved = key && { [key]: value };
+
+			const child_ctx = assign(assign({}, info.ctx), info.resolved);
+			const block = type && (info.current = type)(info.component, child_ctx);
+
+			if (info.block) {
+				if (info.blocks) {
+					info.blocks.forEach((block, i) => {
+						if (i !== index && block) {
+							block.o(() => {
+								block.d(1);
+								info.blocks[i] = null;
+							});
+						}
+					});
+				} else {
+					info.block.d(1);
+				}
+
+				block.c();
+				block[block.i ? 'i' : 'm'](info.mount(), info.anchor);
+
+				info.component.root.set({}); // flush any handlers that were created
+			}
+
+			info.block = block;
+			if (info.blocks) info.blocks[index] = block;
+		}
+
+		if (isPromise(promise)) {
+			promise.then(value => {
+				update(info.then, 1, info.value, value);
+			}, error => {
+				update(info.catch, 2, info.error, error);
+			});
+
+			// if we previously had a then/catch block, destroy it
+			if (info.current !== info.pending) {
+				update(info.pending, 0);
+				return true;
+			}
+		} else {
+			if (info.current !== info.then) {
+				update(info.then, 1, info.value, promise);
+				return true;
+			}
+
+			info.resolved = { [info.value]: promise };
+		}
+	}
+
+	function blankObject() {
+		return Object.create(null);
+	}
+
+	function destroy(detach) {
+		this.destroy = noop;
+		this.fire('destroy');
+		this.set = noop;
+
+		this._fragment.d(detach !== false);
+		this._fragment = null;
+		this._state = {};
+	}
+
+	function destroyDev(detach) {
+		destroy.call(this, detach);
+		this.destroy = function() {
+			console.warn('Component was already destroyed');
+		};
+	}
+
+	function _differs(a, b) {
+		return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+	}
+
+	function fire(eventName, data) {
+		var handlers =
+			eventName in this._handlers && this._handlers[eventName].slice();
+		if (!handlers) return;
+
+		for (var i = 0; i < handlers.length; i += 1) {
+			var handler = handlers[i];
+
+			if (!handler.__calling) {
+				try {
+					handler.__calling = true;
+					handler.call(this, data);
+				} finally {
+					handler.__calling = false;
+				}
+			}
+		}
+	}
+
+	function flush(component) {
+		component._lock = true;
+		callAll(component._beforecreate);
+		callAll(component._oncreate);
+		callAll(component._aftercreate);
+		component._lock = false;
+	}
+
+	function get() {
+		return this._state;
+	}
+
+	function init(component, options) {
+		component._handlers = blankObject();
+		component._slots = blankObject();
+		component._bind = options._bind;
+		component._staged = {};
+
+		component.options = options;
+		component.root = options.root || component;
+		component.store = options.store || component.root.store;
+
+		if (!options.root) {
+			component._beforecreate = [];
+			component._oncreate = [];
+			component._aftercreate = [];
+		}
+	}
+
+	function on(eventName, handler) {
+		var handlers = this._handlers[eventName] || (this._handlers[eventName] = []);
+		handlers.push(handler);
+
+		return {
+			cancel: function() {
+				var index = handlers.indexOf(handler);
+				if (~index) handlers.splice(index, 1);
+			}
+		};
+	}
+
+	function set(newState) {
+		this._set(assign({}, newState));
+		if (this.root._lock) return;
+		flush(this.root);
+	}
+
+	function _set(newState) {
+		var oldState = this._state,
+			changed = {},
+			dirty = false;
+
+		newState = assign(this._staged, newState);
+		this._staged = {};
+
+		for (var key in newState) {
+			if (this._differs(newState[key], oldState[key])) changed[key] = dirty = true;
+		}
+		if (!dirty) return;
+
+		this._state = assign(assign({}, oldState), newState);
+		this._recompute(changed, this._state);
+		if (this._bind) this._bind(changed, this._state);
+
+		if (this._fragment) {
+			this.fire("state", { changed: changed, current: this._state, previous: oldState });
+			this._fragment.p(changed, this._state);
+			this.fire("update", { changed: changed, current: this._state, previous: oldState });
+		}
+	}
+
+	function _stage(newState) {
+		assign(this._staged, newState);
+	}
+
+	function setDev(newState) {
+		if (typeof newState !== 'object') {
+			throw new Error(
+				this._debugName + '.set was called without an object of data key-values to update.'
+			);
+		}
+
+		this._checkReadOnly(newState);
+		set.call(this, newState);
+	}
+
+	function callAll(fns) {
+		while (fns && fns.length) fns.shift()();
+	}
+
+	function _mount(target, anchor) {
+		this._fragment[this._fragment.i ? 'i' : 'm'](target, anchor || null);
+	}
+
+	var protoDev = {
+		destroy: destroyDev,
+		get,
+		fire,
+		on,
+		set: setDev,
+		_recompute: noop,
+		_set,
+		_stage,
+		_mount,
+		_differs
+	};
+
+	let locationSection = { 
+	  name: 'basicLocation', 
+	  component: 'Location',
+	  steps: [
+	    {
+	      fields: { 
+	        unknown: [
+	          {
+	            type: 'postalCode', 
+	            id: 'locationCardPostalCode', 
+	            value: '99547'
+	          }
+	        ],
+	        known: {}
+	      }
+	    }
+	  ]
+	}; 
+
+	let taskPageOne = { 
+	  name: 'taskInterviewPageOne',
+	  component: 'Question',
+	  componentOptions: { 
+	    page: 1
+	  }, 
+	  preload: true,
+	  get: (ctx) => fetch('/data/interview-page-one.json'),
+	}; 
+
+	let taskPageTwo = { 
+	  name: 'taskInterviewPageTwo',
+	  component: 'Question', 
+	  componentOptions: { 
+	    page: 2
+	  }, 
+	  get: (ctx) => fetch('/data/interview-page-two.json')
+	};
+
+	let contactSubmit = { 
+	  name: 'contactSubmit', 
+	  component: 'ContactSubmit', 
+	  steps: [
+	    {
+	      heading: 'Give me your name...',
+	      fields: [
+	        {
+	          type: 'text', 
+	          placeholder: 'First Name',
+	          label: 'First Name',
+	          id: 'firstName',
+	          value: 'Jon'
+	        }, { 
+	          type: 'text',
+	          placeholder: 'Last Name',
+	          label: 'Last Name',
+	          id: 'lastName', 
+	          value: 'Greenemeier'
+	        }
+	      ]
+	    }, { 
+	      heading: 'Give me your addy...',
+	      fields: [ 
+	        { 
+	          type: 'text', 
+	          placeholder: 'Street Address',
+	          label: 'Street Address',
+	          id: 'addressLine1',
+	          value: '1882 E 104th Ave'
+	        }, { 
+	          type: 'text', 
+	          placeholder: 'City',
+	          label: 'City',
+	          id: 'city', 
+	          value: 'Denver'
+	        }, { 
+	          type: 'postalCode', 
+	          placeholder: 'Zip Code',
+	          label: 'Zip Code',
+	          id: 'csPostalCode',
+	          value: '80233'
+	        }
+	      ]
+	    }, { 
+	      heading: 'Give me your deets...',
+	      fields: [ 
+	        {
+	          type: 'phone', 
+	          placeholder: 'Phone',
+	          label: 'Phone',
+	          id: 'phone', 
+	          value: '7203492738'
+	        }, { 
+	          type: 'email', 
+	          placeholder: 'Email',
+	          label: 'Email',
+	          id: 'email', 
+	          value: 'jgrkj23kj@edify.com'
+	        }
+	      ]
+	    }
+	  ] 
+	};
+
+	var config = { 
+	  info: { 
+	    get: (ctx) => fetch('/data/taskInfo.json')
+	  },
+	  sections: [ 
+	    locationSection, 
+	    taskPageOne, 
+	    taskPageTwo,
+	    contactSubmit
+	  ]
+	};
+
+	let combineData = components => values => {
+	  components.forEach((c,i) => {
+	    c.steps = values[i];
+	  });
+	  return components;
+	};
+
+	function getInterview(ctx) { 
+	  var fetchableComponents = config.sections.filter(s => 
+	    s.hasOwnProperty('get') && s.preload
+	  ); 
+	  if(config.info.get) fetchableComponents.push(config.info);
+	  let promises = fetchableComponents.map(c => c.get()); 
+	  return Promise.all(promises)
+	    .then(values => Promise.all(values.map(v => v.json())))
+	    .then(combineData(fetchableComponents))
+	    .then(() => {
+	      config.sections.forEach(s => s.steps = s.steps || []);
+	      return config
+	    });
+	}
+
+	/* src\Components\View.html generated by Svelte v2.15.3 */
+
+	const file = "src\\Components\\View.html";
+
+	function create_main_fragment(component, ctx) {
+		var await_block_anchor, promise, current;
+
+		let info = {
+			component,
+			ctx,
+			current: null,
+			pending: create_pending_block,
+			then: create_then_block,
+			catch: create_catch_block,
+			value: 'data',
+			error: 'error'
+		};
+
+		handlePromise(promise = ctx.promise, info);
+
+		return {
+			c: function create() {
+				await_block_anchor = createComment();
+
+				info.block.c();
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, await_block_anchor, anchor);
+
+				info.block.m(target, info.anchor = anchor);
+				info.mount = () => await_block_anchor.parentNode;
+
+				current = true;
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				info.ctx = ctx;
+
+				('promise' in changed) && promise !== (promise = ctx.promise) && handlePromise(promise, info);
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(await_block_anchor);
+				}
+
+				info.block.d(detach);
+				info = null;
+			}
+		};
+	}
+
+	// (9:0) {:catch error}
+	function create_catch_block(component, ctx) {
+		var slot_content_error = component._slotted.error, slot_content_error_before, slot_content_error_after, h1;
+
+		return {
+			c: function create() {
+				if (!slot_content_error) {
+					h1 = createElement("h1");
+					h1.textContent = "Error!";
+				}
+				if (!slot_content_error) {
+					addLoc(h1, file, 10, 3, 194);
+				}
+			},
+
+			m: function mount(target, anchor) {
+				if (!slot_content_error) {
+					insert(target, h1, anchor);
+				}
+
+				else {
+					insert(target, slot_content_error_before || (slot_content_error_before = createComment()), anchor);
+					insert(target, slot_content_error, anchor);
+					insert(target, slot_content_error_after || (slot_content_error_after = createComment()), anchor);
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (!slot_content_error) {
+					if (detach) {
+						detachNode(h1);
+				}
+
+				}
+
+				else {
+					reinsertBetween(slot_content_error_before, slot_content_error_after, slot_content_error);
+					detachNode(slot_content_error_before);
+					detachNode(slot_content_error_after);
+				}
+			}
+		};
+	}
+
+	// (5:0) {:then data}
+	function create_then_block(component, ctx) {
+		var slot_content_loaded = component._slotted.loaded, slot_content_loaded_before, slot_content_loaded_after, div;
+
+		return {
+			c: function create() {
+				if (!slot_content_loaded) {
+					div = createElement("div");
+					div.textContent = "Loaded!";
+				}
+				if (!slot_content_loaded) {
+					addLoc(div, file, 6, 4, 121);
+				}
+			},
+
+			m: function mount(target, anchor) {
+				if (!slot_content_loaded) {
+					insert(target, div, anchor);
+				}
+
+				else {
+					insert(target, slot_content_loaded_before || (slot_content_loaded_before = createComment()), anchor);
+					insert(target, slot_content_loaded, anchor);
+					insert(target, slot_content_loaded_after || (slot_content_loaded_after = createComment()), anchor);
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (!slot_content_loaded) {
+					if (detach) {
+						detachNode(div);
+				}
+
+				}
+
+				else {
+					reinsertBetween(slot_content_loaded_before, slot_content_loaded_after, slot_content_loaded);
+					detachNode(slot_content_loaded_before);
+					detachNode(slot_content_loaded_after);
+				}
+			}
+		};
+	}
+
+	// (1:16)     <slot name='loading'>     <div>Loading...</div>    </slot>  {:then data}
+	function create_pending_block(component, ctx) {
+		var slot_content_loading = component._slotted.loading, slot_content_loading_before, slot_content_loading_after, div;
+
+		return {
+			c: function create() {
+				if (!slot_content_loading) {
+					div = createElement("div");
+					div.textContent = "Loading...";
+				}
+				if (!slot_content_loading) {
+					addLoc(div, file, 2, 3, 46);
+				}
+			},
+
+			m: function mount(target, anchor) {
+				if (!slot_content_loading) {
+					insert(target, div, anchor);
+				}
+
+				else {
+					insert(target, slot_content_loading_before || (slot_content_loading_before = createComment()), anchor);
+					insert(target, slot_content_loading, anchor);
+					insert(target, slot_content_loading_after || (slot_content_loading_after = createComment()), anchor);
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (!slot_content_loading) {
+					if (detach) {
+						detachNode(div);
+				}
+
+				}
+
+				else {
+					reinsertBetween(slot_content_loading_before, slot_content_loading_after, slot_content_loading);
+					detachNode(slot_content_loading_before);
+					detachNode(slot_content_loading_after);
+				}
+			}
+		};
+	}
+
+	function View(options) {
+		this._debugName = '<View>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		if (!('promise' in this._state)) console.warn("<View> was created without expected data property 'promise'");
+		this._intro = !!options.intro;
+
+		this._slotted = options.slots || {};
+
+		this._fragment = create_main_fragment(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+		}
+
+		this._intro = true;
+	}
+
+	assign(View.prototype, protoDev);
+
+	View.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\InterviewStep.html generated by Svelte v2.15.3 */
+
+	const file$1 = "src\\Components\\InterviewStep.html";
+
+	function create_main_fragment$1(component, ctx) {
+		var div5, form, div4, div1, slot_content_heading = component._slotted.heading, div0, text1, slot_content_body = component._slotted.body, slot_content_body_before, slot_content_body_after, div2, text3, div3, slot_content_footer = component._slotted.footer, a, text5, button, current;
+
+		return {
+			c: function create() {
+				div5 = createElement("div");
+				form = createElement("form");
+				div4 = createElement("div");
+				div1 = createElement("div");
+				if (!slot_content_heading) {
+					div0 = createElement("div");
+					div0.textContent = "Heading";
+				}
+				text1 = createText("\r\n      ");
+				if (!slot_content_body) {
+					div2 = createElement("div");
+					div2.textContent = "Body";
+				}
+				text3 = createText("\r\n      ");
+				div3 = createElement("div");
+				if (!slot_content_footer) {
+					a = createElement("a");
+					a.textContent = "Previous";
+					text5 = createText("\r\n          ");
+					button = createElement("button");
+					button.textContent = "Next";
+				}
+				if (!slot_content_heading) {
+					addLoc(div0, file$1, 5, 10, 169);
+				}
+				div1.className = "card-heading svelte-98rrxd";
+				addLoc(div1, file$1, 3, 6, 100);
+				if (!slot_content_body) {
+					addLoc(div2, file$1, 9, 8, 254);
+				}
+				if (!slot_content_footer) {
+					a.href = "/previous-step";
+					addLoc(a, file$1, 13, 10, 359);
+					button.type = "submit";
+					button.className = "bs-btn";
+					addLoc(button, file$1, 14, 10, 408);
+				}
+				div3.className = "card-footer svelte-98rrxd";
+				addLoc(div3, file$1, 11, 6, 292);
+				div4.className = "card-section svelte-98rrxd";
+				addLoc(div4, file$1, 2, 4, 66);
+				form.className = "bs-card white svelte-98rrxd";
+				addLoc(form, file$1, 1, 2, 32);
+				div5.className = "scroll-section";
+				addLoc(div5, file$1, 0, 0, 0);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div5, anchor);
+				append(div5, form);
+				append(form, div4);
+				append(div4, div1);
+				if (!slot_content_heading) {
+					append(div1, div0);
+				}
+
+				else {
+					append(div1, slot_content_heading);
+				}
+
+				append(div4, text1);
+				if (!slot_content_body) {
+					append(div4, div2);
+				}
+
+				else {
+					append(div4, slot_content_body_before || (slot_content_body_before = createComment()));
+					append(div4, slot_content_body);
+					append(div4, slot_content_body_after || (slot_content_body_after = createComment()));
+				}
+
+				append(div4, text3);
+				append(div4, div3);
+				if (!slot_content_footer) {
+					append(div3, a);
+					append(div3, text5);
+					append(div3, button);
+				}
+
+				else {
+					append(div3, slot_content_footer);
+				}
+
+				current = true;
+			},
+
+			p: noop,
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div5);
+				}
+
+				if (slot_content_heading) {
+					reinsertChildren(div1, slot_content_heading);
+				}
+
+				if (slot_content_body) {
+					reinsertBetween(slot_content_body_before, slot_content_body_after, slot_content_body);
+					detachNode(slot_content_body_before);
+					detachNode(slot_content_body_after);
+				}
+
+				if (slot_content_footer) {
+					reinsertChildren(div3, slot_content_footer);
+				}
+			}
+		};
+	}
+
+	function InterviewStep(options) {
+		this._debugName = '<InterviewStep>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		this._intro = !!options.intro;
+
+		this._slotted = options.slots || {};
+
+		this._fragment = create_main_fragment$1(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+		}
+
+		this._intro = true;
+	}
+
+	assign(InterviewStep.prototype, protoDev);
+
+	InterviewStep.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\sections\Location.html generated by Svelte v2.15.3 */
+
+	const file$2 = "src\\Components\\sections\\Location.html";
+
+	function create_main_fragment$2(component, ctx) {
+		var div, current;
+
+		var interviewstep = new InterviewStep({
+			root: component.root,
+			store: component.store,
+			slots: { default: createFragment(), heading: createFragment() }
+		});
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				div.textContent = "What is your location?";
+				interviewstep._fragment.c();
+				setAttribute(div, "slot", "heading");
+				addLoc(div, file$2, 1, 2, 19);
+			},
+
+			m: function mount(target, anchor) {
+				append(interviewstep._slotted.heading, div);
+				interviewstep._mount(target, anchor);
+				current = true;
+			},
+
+			p: noop,
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (interviewstep) interviewstep._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				interviewstep.destroy(detach);
+			}
+		};
+	}
+
+	function Location(options) {
+		this._debugName = '<Location>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$2(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Location.prototype, protoDev);
+
+	Location.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\questionTypes\Radio.html generated by Svelte v2.15.3 */
+
+	const file$3 = "src\\Components\\questionTypes\\Radio.html";
+
+	function get_each_context(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.answerID = list[i].answerID;
+		child_ctx.answerText = list[i].answerText;
+		return child_ctx;
+	}
+
+	function create_main_fragment$3(component, ctx) {
+		var each_anchor, current;
+
+		var each_value = ctx.question.answerElements;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block(component, get_each_context(ctx, each_value, i));
+		}
+
+		return {
+			c: function create() {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+
+				each_anchor = createComment();
+			},
+
+			m: function mount(target, anchor) {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(target, anchor);
+				}
+
+				insert(target, each_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.question) {
+					each_value = ctx.question.answerElements;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block(component, child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].m(each_anchor.parentNode, each_anchor);
+						}
+					}
+
+					for (; i < each_blocks.length; i += 1) {
+						each_blocks[i].d(1);
+					}
+					each_blocks.length = each_value.length;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				destroyEach(each_blocks, detach);
+
+				if (detach) {
+					detachNode(each_anchor);
+				}
+			}
+		};
+	}
+
+	// (1:0) {#each question.answerElements as {answerID,answerText}}
+	function create_each_block(component, ctx) {
+		var div, input, input_id_value, input_value_value, input_name_value, text0, label, text1_value = ctx.answerText, text1, label_for_value, text2;
+
+		function input_change_handler() {
+			ctx.question.value = input.__value;
+			component.set({ question: ctx.question });
+		}
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				input = createElement("input");
+				text0 = createText("\r\n\t\t");
+				label = createElement("label");
+				text1 = createText(text1_value);
+				text2 = createText("\r\n\t");
+				component._bindingGroups[0].push(input);
+				addListener(input, "change", input_change_handler);
+				setAttribute(input, "type", "radio");
+				input.id = input_id_value = ctx.answerID;
+				input.__value = input_value_value = ctx.answerID;
+				input.value = input.__value;
+				input.name = input_name_value = "radio_" + ctx.question.questionID;
+				addLoc(input, file$3, 2, 2, 68);
+				label.htmlFor = label_for_value = ctx.answerID;
+				label.className = "svelte-5jml85";
+				addLoc(label, file$3, 3, 2, 188);
+				addLoc(div, file$3, 1, 1, 59);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, input);
+
+				input.checked = input.__value === ctx.question.value;
+
+				append(div, text0);
+				append(div, label);
+				append(label, text1);
+				append(div, text2);
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if (changed.question) input.checked = input.__value === ctx.question.value;
+				if ((changed.question) && input_id_value !== (input_id_value = ctx.answerID)) {
+					input.id = input_id_value;
+				}
+
+				if ((changed.question) && input_value_value !== (input_value_value = ctx.answerID)) {
+					input.__value = input_value_value;
+				}
+
+				input.value = input.__value;
+				if ((changed.question) && input_name_value !== (input_name_value = "radio_" + ctx.question.questionID)) {
+					input.name = input_name_value;
+				}
+
+				if ((changed.question) && text1_value !== (text1_value = ctx.answerText)) {
+					setData(text1, text1_value);
+				}
+
+				if ((changed.question) && label_for_value !== (label_for_value = ctx.answerID)) {
+					label.htmlFor = label_for_value;
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div);
+				}
+
+				component._bindingGroups[0].splice(component._bindingGroups[0].indexOf(input), 1);
+				removeListener(input, "change", input_change_handler);
+			}
+		};
+	}
+
+	function Radio(options) {
+		this._debugName = '<Radio>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		if (!('question' in this._state)) console.warn("<Radio> was created without expected data property 'question'");
+		this._bindingGroups = [[]];
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$3(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Radio.prototype, protoDev);
+
+	Radio.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\questionTypes\Checkbox.html generated by Svelte v2.15.3 */
+
+	var methods = { 
+		updateValue(step) { 
+	        console.log(step);
+	        step.value = step.answerElements
+	          .filter(a => a.checked)
+	          .map(a => a.answerID)
+	          .join(',');
+	        this.set({step});
+		}
+	    };
+
+	const file$4 = "src\\Components\\questionTypes\\Checkbox.html";
+
+	function change_handler(event) {
+		const { component, ctx } = this._svelte;
+
+		component.updateValue(ctx.step);
+	}
+
+	function get_each_context$1(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.answerID = list[i].answerID;
+		child_ctx.answerText = list[i].answerText;
+		child_ctx.checked = list[i].checked;
+		child_ctx.each_value = list;
+		child_ctx.each_index = i;
+		return child_ctx;
+	}
+
+	function create_main_fragment$4(component, ctx) {
+		var each_anchor, current;
+
+		var each_value = ctx.step.answerElements;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block$1(component, get_each_context$1(ctx, each_value, i));
+		}
+
+		return {
+			c: function create() {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+
+				each_anchor = createComment();
+			},
+
+			m: function mount(target, anchor) {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(target, anchor);
+				}
+
+				insert(target, each_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.step) {
+					each_value = ctx.step.answerElements;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context$1(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block$1(component, child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].m(each_anchor.parentNode, each_anchor);
+						}
+					}
+
+					for (; i < each_blocks.length; i += 1) {
+						each_blocks[i].d(1);
+					}
+					each_blocks.length = each_value.length;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				destroyEach(each_blocks, detach);
+
+				if (detach) {
+					detachNode(each_anchor);
+				}
+			}
+		};
+	}
+
+	// (1:0) {#each step.answerElements as {answerID,answerText,checked}}
+	function create_each_block$1(component, ctx) {
+		var div, input, input_id_value, input_value_value, text0, label, text1_value = ctx.answerText, text1, label_for_value, text2;
+
+		function input_change_handler() {
+			ctx.each_value[ctx.each_index].checked = input.checked;
+			component.set({ step: ctx.step });
+		}
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				input = createElement("input");
+				text0 = createText("\r\n    ");
+				label = createElement("label");
+				text1 = createText(text1_value);
+				text2 = createText("\r\n  ");
+				input._svelte = { component, ctx };
+
+				addListener(input, "change", input_change_handler);
+				addListener(input, "change", change_handler);
+				setAttribute(input, "type", "checkbox");
+				input.id = input_id_value = ctx.answerID;
+				input.__value = input_value_value = ctx.answerID;
+				input.value = input.__value;
+				addLoc(input, file$4, 2, 4, 75);
+				label.htmlFor = label_for_value = ctx.answerID;
+				label.className = "svelte-1vp3xsv";
+				addLoc(label, file$4, 3, 4, 188);
+				addLoc(div, file$4, 1, 2, 64);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, input);
+
+				input.checked = ctx.checked;
+
+				append(div, text0);
+				append(div, label);
+				append(label, text1);
+				append(div, text2);
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				input._svelte.ctx = ctx;
+				if (changed.step) input.checked = ctx.checked;
+				if ((changed.step) && input_id_value !== (input_id_value = ctx.answerID)) {
+					input.id = input_id_value;
+				}
+
+				if ((changed.step) && input_value_value !== (input_value_value = ctx.answerID)) {
+					input.__value = input_value_value;
+				}
+
+				input.value = input.__value;
+				if ((changed.step) && text1_value !== (text1_value = ctx.answerText)) {
+					setData(text1, text1_value);
+				}
+
+				if ((changed.step) && label_for_value !== (label_for_value = ctx.answerID)) {
+					label.htmlFor = label_for_value;
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div);
+				}
+
+				removeListener(input, "change", input_change_handler);
+				removeListener(input, "change", change_handler);
+			}
+		};
+	}
+
+	function Checkbox(options) {
+		this._debugName = '<Checkbox>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		if (!('step' in this._state)) console.warn("<Checkbox> was created without expected data property 'step'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$4(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Checkbox.prototype, protoDev);
+	assign(Checkbox.prototype, methods);
+
+	Checkbox.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\questionTypes\Select.html generated by Svelte v2.15.3 */
+
+	const file$5 = "src\\Components\\questionTypes\\Select.html";
+
+	function get_each_context$2(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.answerID = list[i].answerID;
+		child_ctx.answerText = list[i].answerText;
+		return child_ctx;
+	}
+
+	function create_main_fragment$5(component, ctx) {
+		var select, select_updating = false, select_id_value, current;
+
+		var each_value = ctx.step.answerElements;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block$2(component, get_each_context$2(ctx, each_value, i));
+		}
+
+		function select_change_handler() {
+			select_updating = true;
+			ctx.step.value = selectValue(select);
+			component.set({ step: ctx.step });
+			select_updating = false;
+		}
+
+		return {
+			c: function create() {
+				select = createElement("select");
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+				addListener(select, "change", select_change_handler);
+				if (!('step' in ctx)) component.root._beforecreate.push(select_change_handler);
+				select.id = select_id_value = ctx.step.questionId;
+				addLoc(select, file$5, 0, 0, 0);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, select, anchor);
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(select, null);
+				}
+
+				selectOption(select, ctx.step.value);
+
+				current = true;
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if (changed.step) {
+					each_value = ctx.step.answerElements;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context$2(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block$2(component, child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].m(select, null);
+						}
+					}
+
+					for (; i < each_blocks.length; i += 1) {
+						each_blocks[i].d(1);
+					}
+					each_blocks.length = each_value.length;
+				}
+
+				if (!select_updating && changed.step) selectOption(select, ctx.step.value);
+				if ((changed.step) && select_id_value !== (select_id_value = ctx.step.questionId)) {
+					select.id = select_id_value;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(select);
+				}
+
+				destroyEach(each_blocks, detach);
+
+				removeListener(select, "change", select_change_handler);
+			}
+		};
+	}
+
+	// (2:1) {#each step.answerElements as {answerID,answerText}}
+	function create_each_block$2(component, ctx) {
+		var option, text0_value = ctx.answerText, text0, text1, option_value_value;
+
+		return {
+			c: function create() {
+				option = createElement("option");
+				text0 = createText(text0_value);
+				text1 = createText("\r\n\t\t");
+				option.__value = option_value_value = ctx.answerID;
+				option.value = option.__value;
+				addLoc(option, file$5, 2, 2, 110);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, option, anchor);
+				append(option, text0);
+				append(option, text1);
+			},
+
+			p: function update(changed, ctx) {
+				if ((changed.step) && text0_value !== (text0_value = ctx.answerText)) {
+					setData(text0, text0_value);
+				}
+
+				if ((changed.step) && option_value_value !== (option_value_value = ctx.answerID)) {
+					option.__value = option_value_value;
+				}
+
+				option.value = option.__value;
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(option);
+				}
+			}
+		};
+	}
+
+	function Select(options) {
+		this._debugName = '<Select>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		if (!('step' in this._state)) console.warn("<Select> was created without expected data property 'step'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$5(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Select.prototype, protoDev);
+
+	Select.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\questionTypes\Text.html generated by Svelte v2.15.3 */
+
+	const file$6 = "src\\Components\\questionTypes\\Text.html";
+
+	function create_main_fragment$6(component, ctx) {
+		var input, input_updating = false, input_placeholder_value, current;
+
+		function input_input_handler() {
+			input_updating = true;
+			ctx.question.value = input.value;
+			component.set({ question: ctx.question });
+			input_updating = false;
+		}
+
+		return {
+			c: function create() {
+				input = createElement("input");
+				addListener(input, "input", input_input_handler);
+				setAttribute(input, "type", "text");
+				input.placeholder = input_placeholder_value = ctx.question.placeholder;
+				addLoc(input, file$6, 0, 0, 0);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, input, anchor);
+
+				input.value = ctx.question.value;
+
+				current = true;
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if (!input_updating && changed.question) input.value = ctx.question.value;
+				if ((changed.question) && input_placeholder_value !== (input_placeholder_value = ctx.question.placeholder)) {
+					input.placeholder = input_placeholder_value;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: run,
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(input);
+				}
+
+				removeListener(input, "input", input_input_handler);
+			}
+		};
+	}
+
+	function Text(options) {
+		this._debugName = '<Text>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		if (!('question' in this._state)) console.warn("<Text> was created without expected data property 'question'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$6(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Text.prototype, protoDev);
+
+	Text.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\sections\Question.html generated by Svelte v2.15.3 */
+
+
+	  function data() { 
+	  return { 
+	    templates: { 
+	      Select,
+	      Checkbox,
+	      Radio,
+	      Text
+	      // DATE: Date, 
+	      // CALENDAR: Date,
+	      // TEXT_AREA: Textarea,
+	      // GRAPHICAL_RADIO: GraphicalRadio
+	    }	
+	  }
+	}
+	const file$7 = "src\\Components\\sections\\Question.html";
+
+	function create_main_fragment$7(component, ctx) {
+		var div0, text0_value = ctx.step.questionText, text0, text1, div2, div1, switch_instance_updating = {}, text2, p, text3, text4_value = ctx.step.value, text4, current;
+
+		var switch_value = ctx.templates[ctx.step.presentationType];
+
+		function switch_props(ctx) {
+			var switch_instance_initial_data = { name: "Question" };
+			if (ctx.step  !== void 0) {
+				switch_instance_initial_data.step = ctx.step ;
+				switch_instance_updating.step = true;
+			}
+			if (ctx.interview  !== void 0) {
+				switch_instance_initial_data.interview = ctx.interview ;
+				switch_instance_updating.interview = true;
+			}
+			return {
+				root: component.root,
+				store: component.store,
+				data: switch_instance_initial_data,
+				_bind(changed, childState) {
+					var newState = {};
+					if (!switch_instance_updating.step && changed.step) {
+						newState.step = childState.step;
+					}
+
+					if (!switch_instance_updating.interview && changed.interview) {
+						newState.interview = childState.interview;
+					}
+					component._set(newState);
+					switch_instance_updating = {};
+				}
+			};
+		}
+
+		if (switch_value) {
+			var switch_instance = new switch_value(switch_props(ctx));
+
+			component.root._beforecreate.push(() => {
+				switch_instance._bind({ step: 1, interview: 1 }, switch_instance.get());
+			});
+		}
+
+		var interviewstep = new InterviewStep({
+			root: component.root,
+			store: component.store,
+			slots: { default: createFragment(), body: createFragment(), heading: createFragment() }
+		});
+
+		return {
+			c: function create() {
+				div0 = createElement("div");
+				text0 = createText(text0_value);
+				text1 = createText("\r\n  ");
+				div2 = createElement("div");
+				div1 = createElement("div");
+				if (switch_instance) switch_instance._fragment.c();
+				text2 = createText("\r\n      ");
+				p = createElement("p");
+				text3 = createText("Value: ");
+				text4 = createText(text4_value);
+				interviewstep._fragment.c();
+				setAttribute(div0, "slot", "heading");
+				addLoc(div0, file$7, 1, 2, 19);
+				addLoc(p, file$7, 5, 6, 237);
+				div1.className = "answers-block svelte-d70yqh";
+				addLoc(div1, file$7, 3, 4, 91);
+				setAttribute(div2, "slot", "body");
+				addLoc(div2, file$7, 2, 2, 68);
+			},
+
+			m: function mount(target, anchor) {
+				append(interviewstep._slotted.heading, div0);
+				append(div0, text0);
+				append(interviewstep._slotted.default, text1);
+				append(interviewstep._slotted.body, div2);
+				append(div2, div1);
+
+				if (switch_instance) {
+					switch_instance._mount(div1, null);
+				}
+
+				append(div1, text2);
+				append(div1, p);
+				append(p, text3);
+				append(p, text4);
+				interviewstep._mount(target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				if ((!current || changed.step) && text0_value !== (text0_value = ctx.step.questionText)) {
+					setData(text0, text0_value);
+				}
+
+				var switch_instance_changes = {};
+				if (!switch_instance_updating.step && changed.step) {
+					switch_instance_changes.step = ctx.step ;
+					switch_instance_updating.step = ctx.step  !== void 0;
+				}
+				if (!switch_instance_updating.interview && changed.interview) {
+					switch_instance_changes.interview = ctx.interview ;
+					switch_instance_updating.interview = ctx.interview  !== void 0;
+				}
+
+				if (switch_value !== (switch_value = ctx.templates[ctx.step.presentationType])) {
+					if (switch_instance) {
+						const old_component = switch_instance;
+						old_component._fragment.o(() => {
+							old_component.destroy();
+						});
+					}
+
+					if (switch_value) {
+						switch_instance = new switch_value(switch_props(ctx));
+
+						component.root._beforecreate.push(() => {
+							const changed = {};
+							if (ctx.step  === void 0) changed.step = 1;
+							if (ctx.interview  === void 0) changed.interview = 1;
+							switch_instance._bind(changed, switch_instance.get());
+						});
+						switch_instance._fragment.c();
+						switch_instance._mount(div1, text2);
+					} else {
+						switch_instance = null;
+					}
+				}
+
+				else if (switch_value) {
+					switch_instance._set(switch_instance_changes);
+					switch_instance_updating = {};
+				}
+
+				if ((!current || changed.step) && text4_value !== (text4_value = ctx.step.value)) {
+					setData(text4, text4_value);
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				outrocallback = callAfter(outrocallback, 2);
+
+				if (switch_instance) switch_instance._fragment.o(outrocallback);
+				if (interviewstep) interviewstep._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				if (switch_instance) switch_instance.destroy();
+				interviewstep.destroy(detach);
+			}
+		};
+	}
+
+	function Question(options) {
+		this._debugName = '<Question>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign(data(), options.data);
+		if (!('step' in this._state)) console.warn("<Question> was created without expected data property 'step'");
+		if (!('templates' in this._state)) console.warn("<Question> was created without expected data property 'templates'");
+		if (!('interview' in this._state)) console.warn("<Question> was created without expected data property 'interview'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$7(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(Question.prototype, protoDev);
+
+	Question.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\sections\ContactSubmit.html generated by Svelte v2.15.3 */
+
+	const file$8 = "src\\Components\\sections\\ContactSubmit.html";
+
+	function get_each_context$3(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.id = list[i].id;
+		child_ctx.label = list[i].label;
+		child_ctx.placeholder = list[i].placeholder;
+		child_ctx.type = list[i].type;
+		return child_ctx;
+	}
+
+	function create_main_fragment$8(component, ctx) {
+		var div0, text0_value = ctx.step.heading, text0, text1, div1, current;
+
+		var each_value = ctx.step.fields;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block$3(component, get_each_context$3(ctx, each_value, i));
+		}
+
+		var interviewstep = new InterviewStep({
+			root: component.root,
+			store: component.store,
+			slots: { default: createFragment(), body: createFragment(), heading: createFragment() }
+		});
+
+		return {
+			c: function create() {
+				div0 = createElement("div");
+				text0 = createText(text0_value);
+				text1 = createText("\r\n  ");
+				div1 = createElement("div");
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+
+				interviewstep._fragment.c();
+				setAttribute(div0, "slot", "heading");
+				addLoc(div0, file$8, 1, 2, 19);
+				setAttribute(div1, "slot", "body");
+				addLoc(div1, file$8, 2, 2, 63);
+			},
+
+			m: function mount(target, anchor) {
+				append(interviewstep._slotted.heading, div0);
+				append(div0, text0);
+				append(interviewstep._slotted.default, text1);
+				append(interviewstep._slotted.body, div1);
+
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].m(div1, null);
+				}
+
+				interviewstep._mount(target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if ((!current || changed.step) && text0_value !== (text0_value = ctx.step.heading)) {
+					setData(text0, text0_value);
+				}
+
+				if (changed.step) {
+					each_value = ctx.step.fields;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context$3(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block$3(component, child_ctx);
+							each_blocks[i].c();
+							each_blocks[i].m(div1, null);
+						}
+					}
+
+					for (; i < each_blocks.length; i += 1) {
+						each_blocks[i].d(1);
+					}
+					each_blocks.length = each_value.length;
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (interviewstep) interviewstep._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				destroyEach(each_blocks, detach);
+
+				interviewstep.destroy(detach);
+			}
+		};
+	}
+
+	// (4:4) {#each step.fields as {id, label, placeholder, type}}
+	function create_each_block$3(component, ctx) {
+		var div, label, text0_value = ctx.label, text0, label_for_value, text1, input, input_type_value, input_id_value, input_placeholder_value, text2;
+
+		return {
+			c: function create() {
+				div = createElement("div");
+				label = createElement("label");
+				text0 = createText(text0_value);
+				text1 = createText("\r\n        ");
+				input = createElement("input");
+				text2 = createText("\r\n      ");
+				label.htmlFor = label_for_value = ctx.id;
+				addLoc(label, file$8, 5, 8, 184);
+				setAttribute(input, "type", input_type_value = ctx.type);
+				input.id = input_id_value = ctx.id;
+				input.placeholder = input_placeholder_value = ctx.placeholder;
+				addLoc(input, file$8, 6, 8, 227);
+				div.className = "bs-form-group";
+				addLoc(div, file$8, 4, 6, 147);
+			},
+
+			m: function mount(target, anchor) {
+				insert(target, div, anchor);
+				append(div, label);
+				append(label, text0);
+				append(div, text1);
+				append(div, input);
+				append(div, text2);
+			},
+
+			p: function update(changed, ctx) {
+				if ((changed.step) && text0_value !== (text0_value = ctx.label)) {
+					setData(text0, text0_value);
+				}
+
+				if ((changed.step) && label_for_value !== (label_for_value = ctx.id)) {
+					label.htmlFor = label_for_value;
+				}
+
+				if ((changed.step) && input_type_value !== (input_type_value = ctx.type)) {
+					setAttribute(input, "type", input_type_value);
+				}
+
+				if ((changed.step) && input_id_value !== (input_id_value = ctx.id)) {
+					input.id = input_id_value;
+				}
+
+				if ((changed.step) && input_placeholder_value !== (input_placeholder_value = ctx.placeholder)) {
+					input.placeholder = input_placeholder_value;
+				}
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(div);
+				}
+			}
+		};
+	}
+
+	function ContactSubmit(options) {
+		this._debugName = '<ContactSubmit>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign({}, options.data);
+		if (!('step' in this._state)) console.warn("<ContactSubmit> was created without expected data property 'step'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$8(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(ContactSubmit.prototype, protoDev);
+
+	ContactSubmit.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\Components\InterviewSection.html generated by Svelte v2.15.3 */
+
+
+	function data$1() { 
+	  return { 
+	    templates: { 
+	      Location, 
+	      Question, 
+	      ContactSubmit
+	    }
+	  }
+	}
+	function get_each_context$4(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.step = list[i];
+		return child_ctx;
+	}
+
+	function create_main_fragment$9(component, ctx) {
+		var each_anchor, current;
+
+		var each_value = ctx.section.steps;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block$4(component, get_each_context$4(ctx, each_value, i));
+		}
+
+		function outroBlock(i, detach, fn) {
+			if (each_blocks[i]) {
+				each_blocks[i].o(() => {
+					if (detach) {
+						each_blocks[i].d(detach);
+						each_blocks[i] = null;
+					}
+					if (fn) fn();
+				});
+			}
+		}
+
+		return {
+			c: function create() {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+
+				each_anchor = createComment();
+			},
+
+			m: function mount(target, anchor) {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].i(target, anchor);
+				}
+
+				insert(target, each_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.templates || changed.section) {
+					each_value = ctx.section.steps;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context$4(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block$4(component, child_ctx);
+							each_blocks[i].c();
+						}
+						each_blocks[i].i(each_anchor.parentNode, each_anchor);
+					}
+					for (; i < each_blocks.length; i += 1) outroBlock(i, 1);
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				each_blocks = each_blocks.filter(Boolean);
+				const countdown = callAfter(outrocallback, each_blocks.length);
+				for (let i = 0; i < each_blocks.length; i += 1) outroBlock(i, 0, countdown);
+
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				destroyEach(each_blocks, detach);
+
+				if (detach) {
+					detachNode(each_anchor);
+				}
+			}
+		};
+	}
+
+	// (1:0) {#each section.steps as step}
+	function create_each_block$4(component, ctx) {
+		var switch_instance_anchor, current;
+
+		var switch_value = ctx.templates[ctx.section.component];
+
+		function switch_props(ctx) {
+			var switch_instance_initial_data = { step: ctx.step };
+			return {
+				root: component.root,
+				store: component.store,
+				data: switch_instance_initial_data
+			};
+		}
+
+		if (switch_value) {
+			var switch_instance = new switch_value(switch_props(ctx));
+		}
+
+		return {
+			c: function create() {
+				if (switch_instance) switch_instance._fragment.c();
+				switch_instance_anchor = createComment();
+			},
+
+			m: function mount(target, anchor) {
+				if (switch_instance) {
+					switch_instance._mount(target, anchor);
+				}
+
+				insert(target, switch_instance_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				var switch_instance_changes = {};
+				if (changed.section) switch_instance_changes.step = ctx.step;
+
+				if (switch_value !== (switch_value = ctx.templates[ctx.section.component])) {
+					if (switch_instance) {
+						const old_component = switch_instance;
+						old_component._fragment.o(() => {
+							old_component.destroy();
+						});
+					}
+
+					if (switch_value) {
+						switch_instance = new switch_value(switch_props(ctx));
+						switch_instance._fragment.c();
+						switch_instance._mount(switch_instance_anchor.parentNode, switch_instance_anchor);
+					} else {
+						switch_instance = null;
+					}
+				}
+
+				else if (switch_value) {
+					switch_instance._set(switch_instance_changes);
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (switch_instance) switch_instance._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				if (detach) {
+					detachNode(switch_instance_anchor);
+				}
+
+				if (switch_instance) switch_instance.destroy(detach);
+			}
+		};
+	}
+
+	function InterviewSection(options) {
+		this._debugName = '<InterviewSection>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign(data$1(), options.data);
+		if (!('section' in this._state)) console.warn("<InterviewSection> was created without expected data property 'section'");
+		if (!('templates' in this._state)) console.warn("<InterviewSection> was created without expected data property 'templates'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$9(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(InterviewSection.prototype, protoDev);
+
+	InterviewSection.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	/* src\App.html generated by Svelte v2.15.3 */
+
+	function data$2() {
+		return { 
+			interview: getInterview()
+		}
+	}
+	const file$a = "src\\App.html";
+
+	function get_each_context$5(ctx, list, i) {
+		const child_ctx = Object.create(ctx);
+		child_ctx.section = list[i];
+		child_ctx.each_value = list;
+		child_ctx.section_index = i;
+		return child_ctx;
+	}
+
+	function create_main_fragment$a(component, ctx) {
+		var div, promise, view_updating = {}, current;
+
+		let info = {
+			component,
+			ctx,
+			current: null,
+			pending: create_pending_block$1,
+			then: create_then_block$1,
+			catch: create_catch_block$1,
+			value: 'data',
+			error: 'null',
+			blocks: Array(3)
+		};
+
+		handlePromise(promise = ctx.interview, info);
+
+		var view_initial_data = {};
+		if (ctx.interview !== void 0) {
+			view_initial_data.promise = ctx.interview;
+			view_updating.promise = true;
+		}
+		var view = new View({
+			root: component.root,
+			store: component.store,
+			slots: { default: createFragment(), loaded: createFragment() },
+			data: view_initial_data,
+			_bind(changed, childState) {
+				var newState = {};
+				if (!view_updating.promise && changed.promise) {
+					newState.interview = childState.promise;
+				}
+				component._set(newState);
+				view_updating = {};
+			}
+		});
+
+		component.root._beforecreate.push(() => {
+			view._bind({ promise: 1 }, view.get());
+		});
+
+		return {
+			c: function create() {
+				div = createElement("div");
+
+				info.block.c();
+
+				view._fragment.c();
+				setAttribute(div, "slot", "loaded");
+				addLoc(div, file$a, 1, 1, 32);
+			},
+
+			m: function mount(target, anchor) {
+				append(view._slotted.loaded, div);
+
+				info.block.i(div, info.anchor = null);
+				info.mount = () => div;
+
+				view._mount(target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				info.ctx = ctx;
+
+				if (('interview' in changed) && promise !== (promise = ctx.interview) && handlePromise(promise, info)) ; else {
+					info.block.p(changed, assign(assign({}, ctx), info.resolved));
+				}
+
+				var view_changes = {};
+				if (!view_updating.promise && changed.interview) {
+					view_changes.promise = ctx.interview;
+					view_updating.promise = ctx.interview !== void 0;
+				}
+				view._set(view_changes);
+				view_updating = {};
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				outrocallback = callAfter(outrocallback, 2);
+
+				const countdown = callAfter(outrocallback, 3);
+				for (let i = 0; i < 3; i += 1) {
+					const block = info.blocks[i];
+					if (block) block.o(countdown);
+					else countdown();
+				}
+
+				if (view) view._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				info.block.d();
+				info = null;
+
+				view.destroy(detach);
+			}
+		};
+	}
+
+	// (1:0) <View bind:promise=interview>   <div slot='loaded'>    {#await interview then data}
+	function create_catch_block$1(component, ctx) {
+
+		return {
+			c: noop,
+
+			m: noop,
+
+			p: noop,
+
+			i: noop,
+
+			o: run,
+
+			d: noop
+		};
+	}
+
+	// (3:30)      {#each data.sections as section}
+	function create_then_block$1(component, ctx) {
+		var each_anchor, current;
+
+		var each_value = ctx.data.sections;
+
+		var each_blocks = [];
+
+		for (var i = 0; i < each_value.length; i += 1) {
+			each_blocks[i] = create_each_block$5(component, get_each_context$5(ctx, each_value, i));
+		}
+
+		function outroBlock(i, detach, fn) {
+			if (each_blocks[i]) {
+				each_blocks[i].o(() => {
+					if (detach) {
+						each_blocks[i].d(detach);
+						each_blocks[i] = null;
+					}
+					if (fn) fn();
+				});
+			}
+		}
+
+		return {
+			c: function create() {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].c();
+				}
+
+				each_anchor = createComment();
+			},
+
+			m: function mount(target, anchor) {
+				for (var i = 0; i < each_blocks.length; i += 1) {
+					each_blocks[i].i(target, anchor);
+				}
+
+				insert(target, each_anchor, anchor);
+				current = true;
+			},
+
+			p: function update(changed, ctx) {
+				if (changed.interview) {
+					each_value = ctx.data.sections;
+
+					for (var i = 0; i < each_value.length; i += 1) {
+						const child_ctx = get_each_context$5(ctx, each_value, i);
+
+						if (each_blocks[i]) {
+							each_blocks[i].p(changed, child_ctx);
+						} else {
+							each_blocks[i] = create_each_block$5(component, child_ctx);
+							each_blocks[i].c();
+						}
+						each_blocks[i].i(div, each_anchor);
+					}
+					for (; i < each_blocks.length; i += 1) outroBlock(i, 1);
+				}
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				each_blocks = each_blocks.filter(Boolean);
+				const countdown = callAfter(outrocallback, each_blocks.length);
+				for (let i = 0; i < each_blocks.length; i += 1) outroBlock(i, 0, countdown);
+
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				destroyEach(each_blocks, detach);
+
+				if (detach) {
+					detachNode(each_anchor);
+				}
+			}
+		};
+	}
+
+	// (4:3) {#each data.sections as section}
+	function create_each_block$5(component, ctx) {
+		var interviewsection_updating = {}, current;
+
+		var interviewsection_initial_data = {};
+		if (ctx.section  !== void 0) {
+			interviewsection_initial_data.section = ctx.section ;
+			interviewsection_updating.section = true;
+		}
+		if (ctx.interview  !== void 0) {
+			interviewsection_initial_data.interview = ctx.interview ;
+			interviewsection_updating.interview = true;
+		}
+		var interviewsection = new InterviewSection({
+			root: component.root,
+			store: component.store,
+			data: interviewsection_initial_data,
+			_bind(changed, childState) {
+				var newState = {};
+				if (!interviewsection_updating.section && changed.section) {
+					ctx.each_value[ctx.section_index] = childState.section = childState.section;
+
+					newState.interview = ctx.interview;
+				}
+
+				if (!interviewsection_updating.interview && changed.interview) {
+					newState.interview = childState.interview;
+				}
+				component._set(newState);
+				interviewsection_updating = {};
+			}
+		});
+
+		component.root._beforecreate.push(() => {
+			interviewsection._bind({ section: 1, interview: 1 }, interviewsection.get());
+		});
+
+		return {
+			c: function create() {
+				interviewsection._fragment.c();
+			},
+
+			m: function mount(target, anchor) {
+				interviewsection._mount(target, anchor);
+				current = true;
+			},
+
+			p: function update(changed, _ctx) {
+				ctx = _ctx;
+				var interviewsection_changes = {};
+				if (!interviewsection_updating.section && changed.interview) {
+					interviewsection_changes.section = ctx.section ;
+					interviewsection_updating.section = ctx.section  !== void 0;
+				}
+				if (!interviewsection_updating.interview && changed.interview) {
+					interviewsection_changes.interview = ctx.interview ;
+					interviewsection_updating.interview = ctx.interview  !== void 0;
+				}
+				interviewsection._set(interviewsection_changes);
+				interviewsection_updating = {};
+			},
+
+			i: function intro(target, anchor) {
+				if (current) return;
+
+				this.m(target, anchor);
+			},
+
+			o: function outro(outrocallback) {
+				if (!current) return;
+
+				if (interviewsection) interviewsection._fragment.o(outrocallback);
+				current = false;
+			},
+
+			d: function destroy$$1(detach) {
+				interviewsection.destroy(detach);
+			}
+		};
+	}
+
+	// (1:0) <View bind:promise=interview>   <div slot='loaded'>    {#await interview then data}
+	function create_pending_block$1(component, ctx) {
+
+		return {
+			c: noop,
+
+			m: noop,
+
+			p: noop,
+
+			i: noop,
+
+			o: run,
+
+			d: noop
+		};
+	}
+
+	function App(options) {
+		this._debugName = '<App>';
+		if (!options || (!options.target && !options.root)) {
+			throw new Error("'target' is a required option");
+		}
+
+		init(this, options);
+		this._state = assign(data$2(), options.data);
+		if (!('interview' in this._state)) console.warn("<App> was created without expected data property 'interview'");
+		this._intro = !!options.intro;
+
+		this._fragment = create_main_fragment$a(this, this._state);
+
+		if (options.target) {
+			if (options.hydrate) throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			this._fragment.c();
+			this._mount(options.target, options.anchor);
+
+			flush(this);
+		}
+
+		this._intro = true;
+	}
+
+	assign(App.prototype, protoDev);
+
+	App.prototype._checkReadOnly = function _checkReadOnly(newState) {
+	};
+
+	const app = new App({
+		target: document.body,
+		data: {
+			name: 'world'
+		}
+	});
+
+	return app;
+
+}());
 //# sourceMappingURL=bundle.js.map

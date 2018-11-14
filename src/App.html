@@ -1,21 +1,11 @@
-<View bind:promise>
-	<span slot='loaded'>
-		{#each interviewSteps as step}
-			{#if step.stepType == 'interviewQuestion'}
-				<InterviewStep>
-					<div slot="heading">
-						{step.questionText}
-					</div>
-					<div slot="body">
-						<Question bind:question=step />
-						<!-- <Json bind:json=step name="{step.questionID}.json" /> -->
-					</div>
-				</InterviewStep>
-			{/if}
-		{/each}
-		<!-- <Json bind:json=interviewSteps name='interview.json' />
-		<Json bind:json=info name='info.json' /> -->
-	</span>
+<View bind:promise=interview>
+	<div slot='loaded'>
+		{#await interview then data}
+			{#each data.sections as section}
+				<InterviewSection bind:section bind:interview />
+			{/each}
+		{/await}
+	</div>
 </View>
 
 <style>
@@ -27,64 +17,18 @@
 
 <script>
 
-	let formatQuestion = q => { 
-		switch(q.presentationType) { 
-			case 'CHECK_BOX': 
-				q.answerElements.forEach(a => a.checked = false);
-				break; 
-			case 'RADIO_ONEPER_LINE':
-			case 'RADIO_SINGLE_LINE':
-			case 'RADIO_BUTTON':
-			case 'RADIO_SINGLE_LINE_LEFT':
-				// q.answerElements.forEach(a => a.checked = false);
-				q.value = q.answerElements[0].answerID;
-				break; 
-		}
-		return q;
-	}; 
+	import { getInterview } from './interview/interviewManager';
 
-	let transformData = (values) => {
-		let [interview,info] = values;
-		return { 
-			info, 
-			interviewSteps: interview.questionElements.map(q => {
-				q.presentationType = q.answerElements[0].presentationType;
-				q.value = '';
-				q.valid = false;
-				q.stepType = 'interviewQuestion';
-				q.questionID = `ques_${q.questionID}`;
-				q.answerElements.forEach(a => a.answerID = `ans_${a.answerID}`);
-				return formatQuestion(q);
-			})
+	export default { 
+		data() {
+			return { 
+				interview: getInterview()
+			}
+		}, 
+		components: { 
+			View: './Components/View.html', 
+			InterviewSection: './Components/InterviewSection.html'
 		}
 	}
 
-	export default {
-		data() { 
-			return {
-				interviewSteps: []
-			}
-		},
-		oncreate() { 
-			let getInterview = fetch(`/data/interview.json`)
-			let getInfo = fetch(`/data/taskInfo.json`)
-			this.set({
-				promise: Promise.all([getInterview, getInfo])
-					.then(values => Promise.all(values.map(v => v.json())))
-					.then()
-					.then(data => {
-						this.set(transformData(data));
-					})
-					.catch(errors => {
-						console.log(errors);
-					})
-			})
-		}, 
-		components: {
-			InterviewStep: './Components/InterviewStep.html',
-			Question: './Components/Question.html', 
-			// Json: './Components/Json.html', 
-			View: './Components/View.html'
-		}
-	};
 </script>

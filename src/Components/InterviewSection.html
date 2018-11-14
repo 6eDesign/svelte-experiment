@@ -1,0 +1,20 @@
+{#each section.steps as step}
+  <svelte:component this="{templates[section.component]}" {step} />
+{/each}
+
+<script>
+  import Location from './sections/Location.html';
+  import Question from './sections/Question.html';
+  import ContactSubmit from './sections/ContactSubmit.html';
+  export default { 
+    data() { 
+      return { 
+        templates: { 
+          Location, 
+          Question, 
+          ContactSubmit
+        }
+      }
+    }
+  }
+</script>

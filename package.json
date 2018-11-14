@@ -2,6 +2,7 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "devDependencies": {
+    "eases-jsnext": "^1.0.10",
     "npm-run-all": "^4.1.3",
     "rollup": "^0.66.2",
     "rollup-plugin-browsersync": "^0.2.6",
@@ -19,5 +20,8 @@
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
     "start:dev": "sirv public --dev"
+  },
+  "dependencies": {
+    "svelte-extras": "^2.0.2"
   }
 }

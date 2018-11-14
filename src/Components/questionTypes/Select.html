@@ -1,0 +1,7 @@
+<select id={step.questionId} bind:value=step.value>
+	{#each step.answerElements as {answerID,answerText}}
+		<option value={answerID}>
+			{answerText}
+		</option>
+	{/each}
+</select>

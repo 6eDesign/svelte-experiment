@@ -1,0 +1,43 @@
+<InterviewStep>
+  <div slot="heading">{step.questionText}</div>
+  <div slot="body">
+    <div class="answers-block">
+      <svelte:component name="Question" this="{templates[step.presentationType]}" bind:step bind:interview />
+      <p>Value: {step.value}</p>
+    </div>
+  </div>
+</InterviewStep>
+
+<style>
+  .answers-block { 
+    display: inline-block;
+    text-align: left;
+    margin: 15px auto;
+  }
+</style>
+
+<script>
+	import Radio from '../questionTypes/Radio.html';
+	import Checkbox from '../questionTypes/Checkbox.html';
+	import Select from '../questionTypes/Select.html';
+	import Text from '../questionTypes/Text.html';
+  export default { 
+    data() { 
+      return { 
+        templates: { 
+          Select,
+          Checkbox,
+          Radio,
+          Text
+          // DATE: Date, 
+          // CALENDAR: Date,
+          // TEXT_AREA: Textarea,
+          // GRAPHICAL_RADIO: GraphicalRadio
+        }	
+      }
+    }, 
+    components: { 
+      InterviewStep: '../InterviewStep.html'
+    }
+  }
+</script>

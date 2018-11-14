@@ -1,0 +1,27 @@
+<InterviewStep>
+  <div slot="heading">{step.heading}</div>
+  <div slot="body">
+    {#each step.fields as {id, label, placeholder, type}}
+      <div class="bs-form-group">
+        <label for="{id}">{label}</label>
+        <input {type} {id} {placeholder} />
+      </div>
+    {/each}
+  </div>
+</InterviewStep>
+
+<style>
+  .answers-block { 
+    display: inline-block;
+    text-align: left;
+    margin: 15px auto;
+  }
+</style>
+
+<script>
+  export default { 
+    components: { 
+      InterviewStep: '../InterviewStep.html'
+    }
+  }
+</script>

@@ -1,18 +1,22 @@
-<div class="bs-card white">
-  <div class="card-section">
-    <div class="card-heading">
-      <slot name='heading'>
-        <div>Heading</div>
+<div class="scroll-section">
+  <form class="bs-card white">
+    <div class="card-section">
+      <div class="card-heading">
+        <slot name='heading'>
+          <div>Heading</div>
+        </slot>
+      </div>
+      <slot name='body'>
+        <div>Body</div>
       </slot>
+      <div class="card-footer">
+        <slot name='footer'>
+          <a href="/previous-step">Previous</a>
+          <button type="submit" class="bs-btn">Next</button>
+        </slot>
+      </div>
     </div>
-    <slot name='body'></slot>
-    <div class="card-footer">
-      <slot name='footer'>
-        <a href="/previous-step">Previous</a>
-        <a class="bs-btn" href="/next-step">Next</a>
-      </slot>
-    </div>
-  </div>
+  </form>
 </div>
 
 <style>
@@ -38,3 +42,8 @@
     border-top: 1px solid #eee;
   }
 </style>
+
+<script>
+  export default { 
+  }; 
+</script>

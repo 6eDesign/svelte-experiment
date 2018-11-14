@@ -2,8 +2,10 @@
   <slot name='loading'>
 	  <div>Loading...</div>
   </slot>
-{:then success}
-	<slot name='loaded'></slot>
+{:then data}
+	<slot name='loaded'>
+    <div>Loaded!</div>
+  </slot>
 {:catch error}
   <slot name='error'>
 	  <h1>Error!</h1>
