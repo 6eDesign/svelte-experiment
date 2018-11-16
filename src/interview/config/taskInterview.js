@@ -1,7 +1,12 @@
-const validateQuestion = (question,section) => {
-  switch(question.type) {
+const validateQuestion = ({step,section}) => {
+  switch(step.type) {
     default: 
-      return !question.required || question.value != '';
+      return !step.required || step.value != '';
+      // can also return a promise - loading states 
+      // will be handled automatically, ex: 
+      // return new Promise((resolve,reject) => {
+      //   setTimeout(resolve,1500,true);
+      // });
   }
 };
 

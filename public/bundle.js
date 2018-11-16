@@ -509,10 +509,15 @@ var app = (function () {
 	  ]
 	};
 
-	const validateQuestion = (question,section) => {
-	  switch(question.type) {
+	const validateQuestion = ({step,section}) => {
+	  switch(step.type) {
 	    default: 
-	      return !question.required || question.value != '';
+	      return !step.required || step.value != '';
+	      // can also return a promise - loading states 
+	      // will be handled automatically, ex: 
+	      // return new Promise((resolve,reject) => {
+	      //   setTimeout(resolve,1500,true);
+	      // });
 	  }
 	};
 
@@ -635,9 +640,9 @@ var app = (function () {
 	      return config
 	    });
 	}
-	function validateStep(step,section) { 
+	function validateStep({step,section}) { 
 	  if(typeof section.validate == 'function') {
-	    return section.validate(step,section); 
+	    return section.validate({step,section}); 
 	  }
 	  return true;
 	}
@@ -645,20 +650,56 @@ var app = (function () {
 	let isAPromise = obj => typeof obj.then == 'function';
 
 	class InterviewStore extends Store {
-	  stepSubmitted(step,section) { 
+
+	  stepSubmitted({step,section}) { 
 	    let state = this.get();
-	    let isValid = validateStep(step,section);
+	    let isValid = validateStep({step,section});
 	    let isAsync = isAPromise(isValid); 
-	    if(isAsync) ; else { 
-	      if(isValid) return this.validStepSubmitted(step,section);
-	      return this.invalidStepSubmitted(step,section);
-	    }
+	    if(!isAsync) { 
+	      return this.validityDetermined({
+	        step,
+	        section,
+	        isAsync,
+	        isValid
+	      });
+	    } 
+	    this.setLoading({step, loading: true});
+	    isValid.then(validity => {
+	      // set loading state: 
+	      this.setLoading({step,loading:false});
+	      this.validityDetermined({
+	        step,
+	        section,
+	        isAsync,
+	        isValid: validity
+	      });
+	    });
 	  }
-	  validStepSubmitted(step,section) { 
+
+	  validityDetermined({step,section,isValid,isAsync}) { 
+	    if(isValid) return this.validStepSubmitted({step,section});
+	    this.invalidStepSubmitted({step,section});
 	  }
-	  invalidStepSubmitted(step,section) { 
+
+	  validStepSubmitted({step,section}) { 
+	    console.log('valid submitted');
+	  }
+	  
+	  invalidStepSubmitted({step,section}) { 
 
 	  }
+
+	  setLoading({step,loading}) {
+	    step.isLoading = loading;
+	    return this.commitInterview();
+	  }
+
+	  commitInterview() { 
+	    let { interview } = this.get();
+	    this.set({interview});
+	    return this;
+	  }
+
 	}
 
 	var store = new InterviewStore({
@@ -671,7 +712,7 @@ var app = (function () {
 	  handleSubmit(event) { 
 	    event.preventDefault();
 	    let { step, section } = this.get();
-	    this.fire('stepSubmitted', {step,section});
+	    this.store.stepSubmitted({step,section});
 	  }
 	};
 
@@ -681,7 +722,7 @@ var app = (function () {
 		var div5, form, div4, div1, slot_content_heading = component._slotted.heading, div0, text1, slot_content_body = component._slotted.body, slot_content_body_before, slot_content_body_after, div2, text3, div3, slot_content_footer = component._slotted.footer, a, text5, button, current;
 
 		function submit_handler(event) {
-			component.handleSubmit(event,{step: ctx.step},{section: ctx.section});
+			component.handleSubmit(event);
 		}
 
 		return {
@@ -709,24 +750,24 @@ var app = (function () {
 					button.textContent = "Next";
 				}
 				if (!slot_content_heading) {
-					addLoc(div0, file, 5, 10, 218);
+					addLoc(div0, file, 7, 10, 213);
 				}
 				div1.className = "card-heading svelte-98rrxd";
-				addLoc(div1, file, 3, 6, 149);
+				addLoc(div1, file, 5, 6, 144);
 				if (!slot_content_body) {
-					addLoc(div2, file, 9, 8, 303);
+					addLoc(div2, file, 11, 8, 298);
 				}
 				if (!slot_content_footer) {
 					a.href = "/previous-step";
-					addLoc(a, file, 13, 10, 408);
+					addLoc(a, file, 15, 10, 403);
 					button.type = "submit";
 					button.className = "bs-btn";
-					addLoc(button, file, 14, 10, 457);
+					addLoc(button, file, 16, 10, 452);
 				}
 				div3.className = "card-footer svelte-98rrxd";
-				addLoc(div3, file, 11, 6, 341);
+				addLoc(div3, file, 13, 6, 336);
 				div4.className = "card-section svelte-98rrxd";
-				addLoc(div4, file, 2, 4, 115);
+				addLoc(div4, file, 4, 4, 110);
 				addListener(form, "submit", submit_handler);
 				form.className = "bs-card white svelte-98rrxd";
 				addLoc(form, file, 1, 2, 32);
@@ -773,10 +814,7 @@ var app = (function () {
 				current = true;
 			},
 
-			p: function update(changed, _ctx) {
-				ctx = _ctx;
-
-			},
+			p: noop,
 
 			i: function intro(target, anchor) {
 				if (current) return;
@@ -818,8 +856,6 @@ var app = (function () {
 
 		init(this, options);
 		this._state = assign({}, options.data);
-		if (!('step' in this._state)) console.warn("<InterviewStep> was created without expected data property 'step'");
-		if (!('section' in this._state)) console.warn("<InterviewStep> was created without expected data property 'section'");
 		this._intro = !!options.intro;
 
 		this._slotted = options.slots || {};
@@ -882,17 +918,13 @@ var app = (function () {
 			interviewstep._bind({ step: 1, section: 1 }, interviewstep.get());
 		});
 
-		interviewstep.on("stepSubmitted", function(event) {
-			component.fire("stepSubmitted", event);
-		});
-
 		return {
 			c: function create() {
 				div = createElement("div");
 				div.textContent = "What is your location?";
 				interviewstep._fragment.c();
 				setAttribute(div, "slot", "heading");
-				addLoc(div, file$1, 4, 2, 71);
+				addLoc(div, file$1, 3, 2, 50);
 			},
 
 			m: function mount(target, anchor) {
@@ -1648,7 +1680,7 @@ var app = (function () {
 	const file$6 = "src\\Components\\sections\\Question.html";
 
 	function create_main_fragment$6(component, ctx) {
-		var div0, text0_value = ctx.step.questionText, text0, text1, div2, div1, switch_instance_updating = {}, text2, p, text3, text4_value = ctx.step.value, text4, interviewstep_updating = {}, current;
+		var div0, text0_value = ctx.step.questionText, text0, text1, text2_value = ctx.step.isLoading, text2, text3, text4, div2, div1, switch_instance_updating = {}, text5, p, text6, text7_value = ctx.step.value, text7, interviewstep_updating = {}, current;
 
 		var switch_value = ctx.templates[ctx.step.presentationType];
 
@@ -1723,36 +1755,38 @@ var app = (function () {
 			interviewstep._bind({ step: 1, section: 1 }, interviewstep.get());
 		});
 
-		interviewstep.on("stepSubmitted", function(event) {
-			component.fire("stepSubmitted", event);
-		});
-
 		return {
 			c: function create() {
 				div0 = createElement("div");
 				text0 = createText(text0_value);
-				text1 = createText("\r\n  ");
+				text1 = createText(" [");
+				text2 = createText(text2_value);
+				text3 = createText("]");
+				text4 = createText("\r\n  ");
 				div2 = createElement("div");
 				div1 = createElement("div");
 				if (switch_instance) switch_instance._fragment.c();
-				text2 = createText("\r\n      ");
+				text5 = createText("\r\n      ");
 				p = createElement("p");
-				text3 = createText("Value: ");
-				text4 = createText(text4_value);
+				text6 = createText("Value: ");
+				text7 = createText(text7_value);
 				interviewstep._fragment.c();
 				setAttribute(div0, "slot", "heading");
-				addLoc(div0, file$6, 4, 2, 71);
-				addLoc(p, file$6, 11, 6, 328);
+				addLoc(div0, file$6, 3, 2, 50);
+				addLoc(p, file$6, 10, 6, 326);
 				div1.className = "answers-block svelte-d70yqh";
-				addLoc(div1, file$6, 6, 4, 143);
+				addLoc(div1, file$6, 5, 4, 141);
 				setAttribute(div2, "slot", "body");
-				addLoc(div2, file$6, 5, 2, 120);
+				addLoc(div2, file$6, 4, 2, 118);
 			},
 
 			m: function mount(target, anchor) {
 				append(interviewstep._slotted.heading, div0);
 				append(div0, text0);
-				append(interviewstep._slotted.default, text1);
+				append(div0, text1);
+				append(div0, text2);
+				append(div0, text3);
+				append(interviewstep._slotted.default, text4);
 				append(interviewstep._slotted.body, div2);
 				append(div2, div1);
 
@@ -1760,10 +1794,10 @@ var app = (function () {
 					switch_instance._mount(div1, null);
 				}
 
-				append(div1, text2);
+				append(div1, text5);
 				append(div1, p);
-				append(p, text3);
-				append(p, text4);
+				append(p, text6);
+				append(p, text7);
 				interviewstep._mount(target, anchor);
 				current = true;
 			},
@@ -1772,6 +1806,10 @@ var app = (function () {
 				ctx = _ctx;
 				if ((!current || changed.step) && text0_value !== (text0_value = ctx.step.questionText)) {
 					setData(text0, text0_value);
+				}
+
+				if ((!current || changed.step) && text2_value !== (text2_value = ctx.step.isLoading)) {
+					setData(text2, text2_value);
 				}
 
 				var switch_instance_changes = {};
@@ -1802,7 +1840,7 @@ var app = (function () {
 							switch_instance._bind(changed, switch_instance.get());
 						});
 						switch_instance._fragment.c();
-						switch_instance._mount(div1, text2);
+						switch_instance._mount(div1, text5);
 					} else {
 						switch_instance = null;
 					}
@@ -1813,8 +1851,8 @@ var app = (function () {
 					switch_instance_updating = {};
 				}
 
-				if ((!current || changed.step) && text4_value !== (text4_value = ctx.step.value)) {
-					setData(text4, text4_value);
+				if ((!current || changed.step) && text7_value !== (text7_value = ctx.step.value)) {
+					setData(text7, text7_value);
 				}
 
 				var interviewstep_changes = {};
@@ -1954,10 +1992,6 @@ var app = (function () {
 			interviewstep._bind({ step: 1, section: 1 }, interviewstep.get());
 		});
 
-		interviewstep.on("stepSubmitted", function(event) {
-			component.fire("stepSubmitted", event);
-		});
-
 		return {
 			c: function create() {
 				div0 = createElement("div");
@@ -1971,9 +2005,9 @@ var app = (function () {
 
 				interviewstep._fragment.c();
 				setAttribute(div0, "slot", "heading");
-				addLoc(div0, file$7, 4, 2, 71);
+				addLoc(div0, file$7, 3, 2, 50);
 				setAttribute(div1, "slot", "body");
-				addLoc(div1, file$7, 5, 2, 115);
+				addLoc(div1, file$7, 4, 2, 94);
 			},
 
 			m: function mount(target, anchor) {
@@ -2053,7 +2087,7 @@ var app = (function () {
 		};
 	}
 
-	// (7:4) {#each step.fields as {id, label, placeholder, type}}
+	// (6:4) {#each step.fields as {id, label, placeholder, type}}
 	function create_each_block$3(component, ctx) {
 		var div, label, text0_value = ctx.label, text0, label_for_value, text1, input, input_type_value, input_id_value, input_placeholder_value, text2;
 
@@ -2066,13 +2100,13 @@ var app = (function () {
 				input = createElement("input");
 				text2 = createText("\r\n      ");
 				label.htmlFor = label_for_value = ctx.id;
-				addLoc(label, file$7, 8, 8, 236);
+				addLoc(label, file$7, 7, 8, 215);
 				setAttribute(input, "type", input_type_value = ctx.type);
 				input.id = input_id_value = ctx.id;
 				input.placeholder = input_placeholder_value = ctx.placeholder;
-				addLoc(input, file$7, 9, 8, 279);
+				addLoc(input, file$7, 8, 8, 258);
 				div.className = "bs-form-group";
-				addLoc(div, file$7, 7, 6, 199);
+				addLoc(div, file$7, 6, 6, 178);
 			},
 
 			m: function mount(target, anchor) {
@@ -2427,12 +2461,6 @@ var app = (function () {
 
 
 
-	var methods$3 = { 
-		stepSubmitted() { 
-			console.log('step submitted',arguments);
-		}
-	};
-
 	function oncreate() { 
 
 	}
@@ -2635,10 +2663,8 @@ var app = (function () {
 				;
 			interviewsection_updating.section = true;
 		}
-		if (ctx.interview 
-				 !== void 0) {
-			interviewsection_initial_data.interview = ctx.interview 
-				;
+		if (ctx.interview  !== void 0) {
+			interviewsection_initial_data.interview = ctx.interview ;
 			interviewsection_updating.interview = true;
 		}
 		var interviewsection = new InterviewSection({
@@ -2666,10 +2692,6 @@ var app = (function () {
 			interviewsection._bind({ section: 1, interview: 1 }, interviewsection.get());
 		});
 
-		interviewsection.on("stepSubmitted", function(event) {
-			component.stepSubmitted();
-		});
-
 		return {
 			c: function create() {
 				interviewsection._fragment.c();
@@ -2690,10 +2712,8 @@ var app = (function () {
 				 !== void 0;
 				}
 				if (!interviewsection_updating.interview && changed.interview) {
-					interviewsection_changes.interview = ctx.interview 
-				;
-					interviewsection_updating.interview = ctx.interview 
-				 !== void 0;
+					interviewsection_changes.interview = ctx.interview ;
+					interviewsection_updating.interview = ctx.interview  !== void 0;
 				}
 				interviewsection._set(interviewsection_changes);
 				interviewsection_updating = {};
@@ -2771,7 +2791,6 @@ var app = (function () {
 	}
 
 	assign(App.prototype, protoDev);
-	assign(App.prototype, methods$3);
 
 	App.prototype._checkReadOnly = function _checkReadOnly(newState) {
 	};

@@ -4,23 +4,57 @@ import { getInterview, validateStep, getNextStep } from './interview/InterviewMa
 let isAPromise = obj => typeof obj.then == 'function';
 
 class InterviewStore extends Store {
-  stepSubmitted(step,section) { 
+
+  stepSubmitted({step,section}) { 
     let state = this.get();
-    let isValid = validateStep(step,section);
+    let isValid = validateStep({step,section});
     let isAsync = isAPromise(isValid); 
-    if(isAsync) { 
-      // handle async flow: 
-    } else { 
-      if(isValid) return this.validStepSubmitted(step,section);
-      return this.invalidStepSubmitted(step,section);
-    }
+    if(!isAsync) { 
+      return this.validityDetermined({
+        step,
+        section,
+        isAsync,
+        isValid
+      });
+    } 
+    this.setLoading({step, loading: true})
+    isValid.then(validity => {
+      // set loading state: 
+      this.setLoading({step,loading:false})
+      this.validityDetermined({
+        step,
+        section,
+        isAsync,
+        isValid: validity
+      });
+    });
   }
-  validStepSubmitted(step,section) { 
-    let nextStep = getNextStep(step,section);
+
+  validityDetermined({step,section,isValid,isAsync}) { 
+    if(isValid) return this.validStepSubmitted({step,section});
+    this.invalidStepSubmitted({step,section});
   }
-  invalidStepSubmitted(step,section) { 
+
+  validStepSubmitted({step,section}) { 
+    console.log('valid submitted');
+    let nextStep = getNextStep({step,section});
+  }
+  
+  invalidStepSubmitted({step,section}) { 
 
   }
+
+  setLoading({step,loading}) {
+    step.isLoading = loading;
+    return this.commitInterview();
+  }
+
+  commitInterview() { 
+    let { interview } = this.get();
+    this.set({interview});
+    return this;
+  }
+
 }
 
 export default new InterviewStore({

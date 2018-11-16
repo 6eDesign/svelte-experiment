@@ -22,9 +22,9 @@ export function getInterview(ctx) {
     });
 }; 
 
-export function validateStep(step,section) { 
+export function validateStep({step,section}) { 
   if(typeof section.validate == 'function') {
-    return section.validate(step,section); 
+    return section.validate({step,section}); 
   }
   return true;
 };

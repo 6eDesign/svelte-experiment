@@ -1,5 +1,7 @@
 <div class="scroll-section">
-  <form class="bs-card white" on:submit="handleSubmit(event,{step},{section})">
+  <form 
+    class="bs-card white" 
+    on:submit="handleSubmit(event)">
     <div class="card-section">
       <div class="card-heading">
         <slot name='heading'>
@@ -49,7 +51,7 @@
       handleSubmit(event) { 
         event.preventDefault();
         let { step, section } = this.get();
-        this.fire('stepSubmitted', {step,section});
+        this.store.stepSubmitted({step,section});
       }
     }
   }; 

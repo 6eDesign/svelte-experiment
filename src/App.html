@@ -2,8 +2,7 @@
 	{#each data.sections as section}
 		<InterviewSection 
 			bind:section 
-			bind:interview 
-			on:stepSubmitted="stepSubmitted()" />
+			bind:interview />
 	{/each}
 {/await}
 
@@ -23,11 +22,6 @@
 			return store;
 		},
 
-		methods: { 
-			stepSubmitted() { 
-				console.log('step submitted',arguments)
-			}
-		}, 
 		oncreate() { 
 
 		},
