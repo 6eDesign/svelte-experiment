@@ -1,5 +1,5 @@
-<select id={step.questionId} bind:value=step.value>
-	{#each step.answerElements as {answerID,answerText}}
+<select id={question.questionId} bind:value=question.value>
+	{#each question.answerElements as {answerID,answerText}}
 		<option value={answerID}>
 			{answerText}
 		</option>

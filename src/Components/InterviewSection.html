@@ -1,5 +1,9 @@
 {#each section.steps as step}
-  <svelte:component this="{templates[section.component]}" {step} />
+  <svelte:component 
+    this="{templates[section.component]}" 
+    bind:step 
+    bind:section 
+    on:stepSubmitted />
 {/each}
 
 <script>

@@ -21,3 +21,14 @@ export function getInterview(ctx) {
       return config
     });
 }; 
+
+export function validateStep(step,section) { 
+  if(typeof section.validate == 'function') {
+    return section.validate(step,section); 
+  }
+  return true;
+};
+
+export function getNextStep(currentStep,currentSection) { 
+
+}; 

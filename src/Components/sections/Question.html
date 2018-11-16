@@ -1,8 +1,14 @@
-<InterviewStep>
+<InterviewStep 
+  on:stepSubmitted 
+  bind:step 
+  bind:section>
   <div slot="heading">{step.questionText}</div>
   <div slot="body">
     <div class="answers-block">
-      <svelte:component name="Question" this="{templates[step.presentationType]}" bind:step bind:interview />
+      <svelte:component 
+        name="Question" 
+        this="{templates[step.presentationType]}" 
+        bind:question=step bind:interview />
       <p>Value: {step.value}</p>
     </div>
   </div>
@@ -37,7 +43,18 @@
       }
     }, 
     components: { 
-      InterviewStep: '../InterviewStep.html'
+      InterviewStep: '../InterviewStep.html', 
+    }, 
+    methods: { 
+      doSomething() { 
+        let { step, section } = this.get(); 
+        this.store.stepSubmitted(step,section);
+      }
+    },
+    onstate({changed,current}) { 
+      if(changed.step) { 
+        this.set({step: current.step});
+      }
     }
   }
 </script>

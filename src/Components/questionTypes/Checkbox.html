@@ -1,6 +1,6 @@
-{#each step.answerElements as {answerID,answerText,checked}}
+{#each question.answerElements as {answerID,answerText,checked}}
   <div>
-    <input type="checkbox" id={answerID} value={answerID} bind:checked=checked on:change="updateValue(step)" />
+    <input type="checkbox" id={answerID} value={answerID} bind:checked=checked on:change="updateValue(question)" />
     <label for={answerID}>{answerText}</label>
   </div>
 {/each}
@@ -14,13 +14,12 @@
 <script>
 	export default { 
 		methods: { 
-			updateValue(step) { 
-        console.log(step);
-        step.value = step.answerElements
+			updateValue(question) { 
+        question.value = question.answerElements
           .filter(a => a.checked)
           .map(a => a.answerID)
-          .join(',');
-        this.set({step});
+          .join(', ');
+        this.set({question});
 			}
     }
 	}

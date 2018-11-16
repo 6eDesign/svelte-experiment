@@ -1,12 +1,11 @@
-<View bind:promise=interview>
-	<div slot='loaded'>
-		{#await interview then data}
-			{#each data.sections as section}
-				<InterviewSection bind:section bind:interview />
-			{/each}
-		{/await}
-	</div>
-</View>
+{#await $interview then data}
+	{#each data.sections as section}
+		<InterviewSection 
+			bind:section 
+			bind:interview 
+			on:stepSubmitted="stepSubmitted()" />
+	{/each}
+{/await}
 
 <style>
   body { 
@@ -16,17 +15,23 @@
 </style>
 
 <script>
-
+	import store from './store';
 	import { getInterview } from './interview/interviewManager';
 
 	export default { 
-		data() {
-			return { 
-				interview: getInterview()
+		store() { 
+			return store;
+		},
+
+		methods: { 
+			stepSubmitted() { 
+				console.log('step submitted',arguments)
 			}
 		}, 
+		oncreate() { 
+
+		},
 		components: { 
-			View: './Components/View.html', 
 			InterviewSection: './Components/InterviewSection.html'
 		}
 	}

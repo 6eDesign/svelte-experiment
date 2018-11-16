@@ -1,4 +1,7 @@
-<InterviewStep>
+<InterviewStep 
+  on:stepSubmitted 
+  bind:step 
+  bind:section>
   <div slot="heading">{step.heading}</div>
   <div slot="body">
     {#each step.fields as {id, label, placeholder, type}}
