@@ -2,11 +2,32 @@
   bind:step 
   bind:section>
   <div slot="heading">What is your location?</div>
-  
+  <div slot="body">
+    {#each step.fields as field}
+      <label for="{field.id}"></label>
+      <input 
+        id="{field.id}" 
+        type="text" 
+        bind:value=field.value 
+        on:keyup="lookupZip()" 
+        placeholder={field.placeholder} />
+    {/each}
+  </div>
 </InterviewStep>
+
+<style>
+  input { 
+    text-align: center;
+  }
+</style>
 
 <script>
   export default { 
+    methods: { 
+      lookupZip() { 
+        console.log('lookup zip', this.get());
+      }
+    }, 
     components: { 
       InterviewStep: '../InterviewStep.html'
     }

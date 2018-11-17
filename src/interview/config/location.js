@@ -1,18 +1,15 @@
 export const locationSection = { 
-  name: 'basicLocation', 
+  id: 'basicLocation', 
   component: 'Location',
   steps: [
     {
-      fields: { 
-        unknown: [
-          {
-            type: 'postalCode', 
-            id: 'locationCardPostalCode', 
-            value: '99547'
-          }
-        ],
-        known: {}
-      }
+      id: 'unknownUserLocationCard',
+      fields: [{
+        type: 'postalCode', 
+        id: 'locationCardPostalCode', 
+        placeholder: 'Enter Zip Code',
+        value: ''
+      }]
     }
   ]
 }; 

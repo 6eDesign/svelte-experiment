@@ -1,6 +1,7 @@
-{#each section.steps as step}
+{#each section.steps as step (step.id)}
   <svelte:component 
     this="{templates[section.component]}" 
+    bind:isLoading=step.isLoading
     bind:step 
     bind:section 
     on:stepSubmitted />

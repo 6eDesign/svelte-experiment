@@ -1,8 +1,9 @@
 export const contactSubmit = { 
-  name: 'contactSubmit', 
+  id: 'contactSubmit', 
   component: 'ContactSubmit', 
   steps: [
     {
+      id: 'contactSubmitOne',
       heading: 'Give me your name...',
       fields: [
         {
@@ -20,6 +21,7 @@ export const contactSubmit = {
         }
       ]
     }, { 
+      id: 'contactSubmitTwo',
       heading: 'Give me your addy...',
       fields: [ 
         { 
@@ -43,6 +45,7 @@ export const contactSubmit = {
         }
       ]
     }, { 
+      id: 'contactSubmitThree',
       heading: 'Give me your deets...',
       fields: [ 
         {

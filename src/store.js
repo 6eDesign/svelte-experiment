@@ -6,7 +6,6 @@ let isAPromise = obj => typeof obj.then == 'function';
 class InterviewStore extends Store {
 
   stepSubmitted({step,section}) { 
-    let state = this.get();
     let isValid = validateStep({step,section});
     let isAsync = isAPromise(isValid); 
     if(!isAsync) { 
@@ -36,15 +35,32 @@ class InterviewStore extends Store {
   }
 
   validStepSubmitted({step,section}) { 
-    console.log('valid submitted');
-    let nextStep = getNextStep({step,section});
+    getNextStep({step,section}).then(nextStep => {
+      this.setVisible({step: nextStep, visibility: true});
+      this.scrollToStep({step: nextStep});
+    }).catch(this.catastrophicError);
   }
   
   invalidStepSubmitted({step,section}) { 
+    
+  }
 
+  scrollToStep({step}) { 
+    window.scroll({
+      top: document.querySelector(`.scroll-section[data-id="${step.id}"]`).offsetTop, 
+      left: 0, 
+      behavior: 'smooth'
+    });
+  }
+
+  setVisible({step,visibility}) { 
+    step.isVisible = visibility;
+    this.commitInterview();
   }
 
   setLoading({step,loading}) {
+    let { interview } = this.get();
+    interview.isLoading = loading;
     step.isLoading = loading;
     return this.commitInterview();
   }
@@ -55,8 +71,17 @@ class InterviewStore extends Store {
     return this;
   }
 
+  catastrophicError(err) { 
+    console.log('oh nose', err);
+  }
+
 }
 
-export default new InterviewStore({
-  interview: getInterview()
+const interviewStore = new InterviewStore({
+  interview: null,
+  interviewPromise: getInterview().then(interview => {
+    interviewStore.set({interview})
+  })
 });
+
+export default interviewStore;

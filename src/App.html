@@ -1,15 +1,21 @@
-{#await $interview then data}
-	{#each data.sections as section}
-		<InterviewSection 
-			bind:section 
-			bind:interview />
-	{/each}
+{#await $interview then success}
+  {#if $interview}
+    {#each $interview.sections as section}
+      <InterviewSection 
+        bind:section 
+        bind:interview=$interview />
+    {/each}
+  {/if}
 {/await}
+<div class="footer-displacer"></div>
 
 <style>
   body { 
     padding: 0;
     margin: 0;
+  }
+  .footer-displacer { 
+    height: 100vh;
   }
 </style>
 
