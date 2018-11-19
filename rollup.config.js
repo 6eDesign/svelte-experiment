@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import browsersync from 'rollup-plugin-browsersync';
+import buble from 'rollup-plugin-buble';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,7 +38,7 @@ export default {
 		resolve(),
     commonjs(),
     !production && browsersync({server: 'public'}),
-
+    buble(),
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser()
