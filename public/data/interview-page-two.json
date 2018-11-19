@@ -37,7 +37,7 @@
     "questionText": "What kind of location is this?",
     "required": true,
     "defaultAnswer": -9999,
-    "presentationType": "Radio", 
+    "presentationType": "Select", 
     "answerElements": [
       {
         "answerID": 20767,

@@ -36,8 +36,8 @@ class InterviewStore extends Store {
 
   validStepSubmitted({step,section}) { 
     getNextStep({step,section}).then(nextStep => {
-      this.setVisible({step: nextStep, visibility: true});
-      this.scrollToStep({step: nextStep});
+      this.setVisible({step: nextStep, visibility: true})
+        .presentStep({step: nextStep});
     }).catch(this.catastrophicError);
   }
   
@@ -45,17 +45,19 @@ class InterviewStore extends Store {
     
   }
 
-  scrollToStep({step}) { 
+  presentStep({step}) { 
+    this.set({ currentStep: step.id });
     window.scroll({
       top: document.querySelector(`.scroll-section[data-id="${step.id}"]`).offsetTop, 
       left: 0, 
       behavior: 'smooth'
     });
+    return this;
   }
 
   setVisible({step,visibility}) { 
     step.isVisible = visibility;
-    this.commitInterview();
+    return this.commitInterview();
   }
 
   setLoading({step,loading}) {
@@ -78,10 +80,16 @@ class InterviewStore extends Store {
 }
 
 const interviewStore = new InterviewStore({
+  currentStep: null,
   interview: null,
   interviewPromise: getInterview().then(interview => {
     interviewStore.set({interview})
   })
 });
+
+// interviewStore.compute(
+//   'translateX',
+//   ['currentStep', ]
+// )
 
 export default interviewStore;

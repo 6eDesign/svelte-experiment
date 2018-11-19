@@ -1,12 +1,15 @@
 {#await $interview then success}
   {#if $interview}
-    {#each $interview.sections as section}
-      <InterviewSection 
-        bind:section 
-        bind:interview=$interview />
+    {#each $interview.sections as section (section.id)}
+      {#if section.steps.length > 0}
+        <InterviewSection 
+          section={section} 
+          interview={$interview} />
+      {/if}
     {/each}
   {/if}
 {/await}
+
 <div class="footer-displacer"></div>
 
 <style>
@@ -26,10 +29,6 @@
 	export default { 
 		store() { 
 			return store;
-		},
-
-		oncreate() { 
-
 		},
 		components: { 
 			InterviewSection: './Components/InterviewSection.html'

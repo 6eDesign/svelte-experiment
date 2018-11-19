@@ -4,7 +4,8 @@
     bind:isLoading=step.isLoading
     bind:step 
     bind:section 
-    on:stepSubmitted />
+    on:stepSubmitted
+    ref:component />
 {/each}
 
 <script>
@@ -12,6 +13,9 @@
   import Question from './sections/Question.html';
   import ContactSubmit from './sections/ContactSubmit.html';
   export default { 
+    oncreate(){
+      console.log(this.refs);
+    },
     data() { 
       return { 
         templates: { 

@@ -27,11 +27,10 @@ const defaultStepConfig = getDefaultApplier({
   isVisible: false
 });
 
-const formatConfiguration = config => {
+const formatConfiguration = config => 
   config.sections.forEach(section => 
     defaultSectionConfig(section).steps.forEach(defaultStepConfig)  
-  )
-}
+  );
 
 const setStepVisible = step => step.isVisible = true;
 
@@ -57,6 +56,7 @@ const getNextSection = (currSection) => new Promise((resolve,reject) => {
   if(currentIndex == -1) return reject('Section not found'); 
   const nextSection = config.sections[currentIndex + 1];
   if(typeof nextSection.get == 'function' && nextSection.steps.length == 0) { 
+    console.log('fetching next section');
     loadSection(nextSection).then(resolve).catch(reject);
   } else { 
     resolve(config.sections[currentIndex + 1]);
@@ -91,7 +91,6 @@ export function getNextStep({step,section}) {
     const stepIndex = getStepIndexInSection({step,section});
     if(stepIndex == -1) return reject('Step not found');
     if(stepIndex + 1 >= section.steps.length) { 
-      console.log('fetching next section');
       getNextSection(section).then(nextSection => { 
         resolve(nextSection.steps[0]);
       }).catch(reject);
