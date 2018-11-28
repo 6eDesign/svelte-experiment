@@ -1,5 +1,5 @@
 <div 
-  class="scroll-section"
+  class="scroll-section {step.id}"
   data-id="{step.id}"
   class:visible="step.isVisible">
   <form 
@@ -23,7 +23,8 @@
     </div>
     <div 
       class:visible="step.isLoading"
-      class="loading-section">
+      class="loading-section"
+      ref:loadingSection>
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 792" enable-background="new 0 0 612 792" xml:space="preserve">
         <g>
           <path d="M404.5,478.3c-8.1-10.5-23.4-12.6-33.6-4.2c-17.6,14.6-40.1,23.5-64.8,23.5c-49.3,0-90.3-35.1-99.6-81.7l34.6-3.1
@@ -47,6 +48,16 @@
   .scroll-section.visible { 
     opacity: 1; 
     height: auto;
+    animation: animateScrollCardIn 450ms forwards; 
+  }
+  .scroll-section.visible .card-section { 
+    opacity: 0; 
+    animation: fadeIn 250ms 450ms forwards linear;
+  }  
+  .scroll-section.visible.unknownUserLocationCard, 
+  .scroll-section.visible.unknownUserLocationCard .card-section { 
+    animation: none;
+    opacity: 1;
   }
   .bs-card { 
     max-width: 670px;
@@ -104,6 +115,24 @@
       transform: rotate(360deg);
     }
   }
+  @keyframes animateScrollCardIn { 
+    0% { 
+      opacity: 0; 
+      transform: scale(1.2) translateY(50px); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: scale(1) translateY(0); 
+    }
+  }
+  @keyframes fadeIn { 
+    0% { 
+      opacity: 0; 
+    }
+    100% { 
+      opacity: 1; 
+    }
+  }
 </style>
 
 <script>
@@ -114,6 +143,9 @@
         let { step, section } = this.get();
         this.store.stepSubmitted({step,section});
       }
+    }, 
+    oncreate: function() { 
+      console.log(this.refs);
     }
   }; 
 </script>

@@ -8,7 +8,6 @@
         name="Question" 
         this="{templates[step.presentationType]}" 
         bind:question=step bind:interview />
-      <!-- <p>Value: {step.value}</p> -->
     </div>
   </div>
 </InterviewStep>
@@ -43,17 +42,6 @@
     }, 
     components: { 
       InterviewStep: '../InterviewStep.html', 
-    }, 
-    methods: { 
-      doSomething() { 
-        let { step, section } = this.get(); 
-        this.store.stepSubmitted(step,section);
-      }
-    },
-    onstate({changed,current}) { 
-      if(changed.step) { 
-        this.set({step: current.step});
-      }
     }
   }
 </script>
